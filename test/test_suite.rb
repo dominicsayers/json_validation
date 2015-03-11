@@ -1,8 +1,6 @@
 require 'test_helper'
 
 Dir[File.join(File.dirname(__FILE__), 'json-schema-test-suite', 'tests', 'draft4', '*.json')].each do |path|
-  next if ['definitions', 'ref', 'refRemote'].include?(File.basename(path, '.json')) # XXX
-
   describe File.basename(path, '.json') do
     test_groups = JSON.load(File.read(path))
 
@@ -14,8 +12,9 @@ Dir[File.join(File.dirname(__FILE__), 'json-schema-test-suite', 'tests', 'draft4
           end
 
           specify test['description'] do
+            skip if test_group['description'] == 'change resolution scope'
             record = test['data']
-            assert_equal(test['valid'], JsonValidator.validate(@schema, record))
+            assert_equal(test['valid'], JsonValidator.validate(@schema, @schema, record))
           end
         end
       end

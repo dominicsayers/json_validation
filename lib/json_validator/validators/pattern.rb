@@ -6,8 +6,8 @@ module JsonValidator
 
       type :string
 
-      def validate(schema, record)
-        rx = Regexp.new(schema['pattern'])
+      def validate(schema, fragment, record)
+        rx = Regexp.new(fragment['pattern'])
         !!rx.match(record)
       end
     end

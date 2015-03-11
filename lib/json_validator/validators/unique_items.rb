@@ -6,8 +6,8 @@ module JsonValidator
 
       type :array
 
-      def validate(schema, record)
-        if schema['uniqueItems']
+      def validate(schema, fragment, record)
+        if fragment['uniqueItems']
           record.size == record.uniq.size
         else
           true

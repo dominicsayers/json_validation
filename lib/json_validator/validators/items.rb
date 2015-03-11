@@ -6,16 +6,16 @@ module JsonValidator
 
       type :array
 
-      def validate(schema, record)
-        case schema['items']
+      def validate(schema, fragment, record)
+        case fragment['items']
         when Hash
-          record.all? {|item| JsonValidator.validate(schema['items'], item)}
+          record.all? {|item| JsonValidator.validate(schema, fragment['items'], item)}
         when Array
-          schema['items'].zip(record).all? {|item_schema, item|
-            JsonValidator.validate(item_schema, item)
+          fragment['items'].zip(record).all? {|item_fragment, item|
+            JsonValidator.validate(schema, item_fragment, item)
           }
         else
-          raise "Unexpected type for schema['items']"
+          raise "Unexpected type for fragment['items']"
         end
       end
     end

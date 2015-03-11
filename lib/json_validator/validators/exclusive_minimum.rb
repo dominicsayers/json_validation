@@ -6,7 +6,7 @@ module JsonValidator
 
       type :number
 
-      def validate(schema, record)
+      def validate(schema, fragment, record)
         true # no-op (handled by Minimum)
       end
     end

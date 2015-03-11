@@ -6,8 +6,8 @@ module JsonValidator
 
       type :any
 
-      def validate(schema, record)
-        schema['enum'].include?(record)
+      def validate(schema, fragment, record)
+        fragment['enum'].include?(record)
       end
     end
   end

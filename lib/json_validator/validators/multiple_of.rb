@@ -6,8 +6,8 @@ module JsonValidator
 
       type :number
 
-      def validate(schema, record)
-        BigDecimal.new(record.to_s) % BigDecimal.new(schema['multipleOf'].to_s) == 0
+      def validate(schema, fragment, record)
+        BigDecimal.new(record.to_s) % BigDecimal.new(fragment['multipleOf'].to_s) == 0
       end
     end
   end

@@ -6,8 +6,8 @@ module JsonValidator
 
       type :object
 
-      def validate(schema, record)
-        schema['minProperties'] <= record.size
+      def validate(schema, fragment, record)
+        fragment['minProperties'] <= record.size
       end
     end
   end

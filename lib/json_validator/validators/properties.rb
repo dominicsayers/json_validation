@@ -6,10 +6,10 @@ module JsonValidator
 
       type :object
 
-      def validate(schema, record)
-        schema['properties'].keys.all? {|key|
+      def validate(schema, fragment, record)
+        fragment['properties'].keys.all? {|key|
           if record[key]
-            JsonValidator.validate(schema['properties'][key], record[key])
+            JsonValidator.validate(schema, fragment['properties'][key], record[key])
           else
             true
           end

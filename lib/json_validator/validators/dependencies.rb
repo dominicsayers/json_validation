@@ -6,13 +6,13 @@ module JsonValidator
 
       type :object
 
-      def validate(schema, record)
-        schema['dependencies'].all? {|property, v|
+      def validate(schema, fragment, record)
+        fragment['dependencies'].all? {|property, v|
           case v
           when Hash
-            dependency_schema = v
+            dependency_fragment = v
             if record.has_key?(property)
-              JsonValidator.validate(dependency_schema, record)
+              JsonValidator.validate(schema, dependency_fragment, record)
             else
               true
             end
@@ -24,7 +24,7 @@ module JsonValidator
               true
             end
           else
-            raise "Unexpected type for schema['dependencies']['#{property}']"
+            raise "Unexpected type for fragment['dependencies']['#{property}']"
           end
         }
       end

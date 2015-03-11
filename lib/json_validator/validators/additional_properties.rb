@@ -6,26 +6,26 @@ module JsonValidator
 
       type :object
 
-      def validate(schema, record)
-        case schema['additionalProperties']
+      def validate(schema, fragment, record)
+        case fragment['additionalProperties']
         when true
           true
         when false
-          find_additional_properties(schema, record).empty?
+          find_additional_properties(fragment, record).empty?
         when Hash
-          find_additional_properties(schema, record).values.all? {|value|
-            JsonValidator.validate(schema['additionalProperties'], value)
+          find_additional_properties(fragment, record).values.all? {|value|
+            JsonValidator.validate(schema, fragment['additionalProperties'], value)
           }
         else
-          raise "Unexpected type for schema['additionalProperties']"
+          raise "Unexpected type for fragment['additionalProperties']"
         end
       end
 
-      def find_additional_properties(schema, record)
+      def find_additional_properties(fragment, record)
         record.reject {|k, v|
-          schema.fetch('properties', {}).keys.include?(k)
+          fragment.fetch('properties', {}).keys.include?(k)
         }.reject {|k, v|
-          schema.fetch('patternProperties', {}).keys.any? {|pattern|
+          fragment.fetch('patternProperties', {}).keys.any? {|pattern|
             rx = Regexp.new(pattern)
             rx.match(k)
           }

@@ -6,8 +6,8 @@ module JsonValidator
 
       type :any
 
-      def validate(schema, record)
-        schema['allOf'].all? {|all_of_schema| JsonValidator.validate(all_of_schema, record)}
+      def validate(schema, fragment, record)
+        fragment['allOf'].all? {|all_of_fragment| JsonValidator.validate(schema, all_of_fragment, record)}
       end
     end
   end

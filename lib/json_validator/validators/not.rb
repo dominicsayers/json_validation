@@ -6,8 +6,8 @@ module JsonValidator
 
       type :any
 
-      def validate(schema, record)
-        !JsonValidator.validate(schema['not'], record)
+      def validate(schema, fragment, record)
+        !JsonValidator.validate(schema, fragment['not'], record)
       end
     end
   end

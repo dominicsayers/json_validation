@@ -6,11 +6,11 @@ module JsonValidator
 
       type :number
 
-      def validate(schema, record)
-        if schema['exclusiveMaximum']
-          schema['maximum'] > record
+      def validate(schema, fragment, record)
+        if fragment['exclusiveMaximum']
+          fragment['maximum'] > record
         else
-          schema['maximum'] >= record
+          fragment['maximum'] >= record
         end
       end
     end

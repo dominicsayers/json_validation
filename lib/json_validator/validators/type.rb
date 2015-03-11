@@ -6,8 +6,8 @@ module JsonValidator
 
       type :any
 
-      def validate(schema, record)
-        types = Array(schema['type'])
+      def validate(schema, fragment, record)
+        types = Array(fragment['type'])
         types.any? {|type| 
           klasses = JsonValidator::TYPES_TO_CLASSES.fetch(type)
           klasses.any? {|klass| record.is_a?(klass)}

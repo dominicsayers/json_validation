@@ -6,8 +6,8 @@ module JsonValidator
 
       type :any
 
-      def validate(schema, record)
-        schema['oneOf'].count {|one_of_schema| JsonValidator.validate(one_of_schema, record)} == 1
+      def validate(schema, fragment, record)
+        fragment['oneOf'].count {|one_of_fragment| JsonValidator.validate(schema, one_of_fragment, record)} == 1
       end
     end
   end

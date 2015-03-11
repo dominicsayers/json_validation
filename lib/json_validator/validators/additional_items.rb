@@ -6,27 +6,27 @@ module JsonValidator
 
       type :array
 
-      def validate(schema, record)
-        if !schema.has_key?('items') || schema['items'].is_a?(Hash)
+      def validate(schema, fragment, record)
+        if !fragment.has_key?('items') || fragment['items'].is_a?(Hash)
           true
         else
-          case schema['additionalItems']
+          case fragment['additionalItems']
           when true
             true
           when false
-            find_additional_items(schema, record).empty?
+            find_additional_items(fragment, record).empty?
           when Hash
-            find_additional_items(schema, record).all? {|item|
-              JsonValidator.validate(schema['additionalItems'], item)
+            find_additional_items(fragment, record).all? {|item|
+              JsonValidator.validate(schema, fragment['additionalItems'], item)
             }
           else
-            raise "Unexpected type for schema['additionalItems']"
+            raise "Unexpected type for fragment['additionalItems']"
           end
         end
       end
 
-      def find_additional_items(schema, record)
-        record.drop(schema['items'].size)
+      def find_additional_items(fragment, record)
+        record.drop(fragment['items'].size)
       end
     end
   end

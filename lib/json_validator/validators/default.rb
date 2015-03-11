@@ -6,7 +6,7 @@ module JsonValidator
 
       type :any
 
-      def validate(schema, record)
+      def validate(schema, fragment, record)
         true
       end
     end
