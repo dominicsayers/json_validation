@@ -8,6 +8,7 @@ group :development do
 end
 
 group :test do
+  gem 'mocha'
   gem 'minitest'
   gem 'minitest-reporters'
 end

@@ -16,7 +16,7 @@ module JsonValidator
           reffed_schema = schema
         else
           uri.fragment = ''
-          reffed_schema = JSON.parse(open(uri).read)
+          reffed_schema = JsonValidator.load_schema(uri)
         end
 
         reffed_fragment = look_up_path(reffed_schema, uri_fragment)

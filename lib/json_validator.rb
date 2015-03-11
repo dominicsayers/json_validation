@@ -43,4 +43,13 @@ module JsonValidator
       end
     }
   end
+
+  def load_schema(uri)
+    @schema_cache ||= Hash.new {|h, k|
+      schema = JSON.parse(open(k).read)
+      @schema_cache[k] = schema
+    }
+
+    @schema_cache[uri]
+  end
 end
