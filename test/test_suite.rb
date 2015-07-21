@@ -8,7 +8,7 @@ Dir[File.join(File.dirname(__FILE__), 'json-schema-test-suite', 'tests', 'draft4
       describe test_group['description'] do
         test_group['tests'].each do |test|
           before do
-            @schema = test_group['schema']
+            @schema = JsonValidator.build_schema(test_group['schema'])
           end
 
           specify test['description'] do

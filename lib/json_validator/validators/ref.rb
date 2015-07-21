@@ -26,7 +26,7 @@ module JsonValidator
       def look_up_path(schema, path)
         return schema if path == '' || path.nil?
 
-        fragment = schema
+        fragment = schema.data
 
         path[1..-1].split('/').each do |element|
           element = element.gsub('~0', '~').gsub('~1', '/').gsub('%25', '%')
@@ -46,9 +46,9 @@ module JsonValidator
               end
             rescue ArgumentError
             end
+          else
+            raise "Could not look up #{path} in #{schema}"
           end
-
-          raise "Could not look up #{path} in #{schema}"
         end
 
         fragment

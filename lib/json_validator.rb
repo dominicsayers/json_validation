@@ -4,9 +4,10 @@ require 'open-uri'
 
 require 'addressable/uri'
 
-require 'json_validator/version'
+require 'json_validator/schema'
 require 'json_validator/validator'
 Dir[File.join(File.dirname(__FILE__), 'json_validator', 'validators', '*.rb')].each {|path| require path}
+require 'json_validator/version'
 
 module JsonValidator
   extend self
@@ -44,10 +45,14 @@ module JsonValidator
     }
   end
 
+  def build_schema(schema_data, uri=nil)
+    Schema.new(schema_data, uri)
+  end
+
   def load_schema(uri)
     @schema_cache ||= Hash.new {|h, k|
-      schema = JSON.parse(open(k).read)
-      @schema_cache[k] = schema
+      schema_data = JSON.parse(open(k).read)
+      @schema_cache[k] = build_schema(schema_data, uri)
     }
 
     @schema_cache[uri]

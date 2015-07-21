@@ -5,12 +5,12 @@ describe JsonValidator do
     it 'can load schema on filesystem' do
       path = File.join(File.dirname(__FILE__), 'schemas', 'integer.json')
       uri = Addressable::URI.parse(path)
-      assert_equal({'type' => 'integer'}, JsonValidator.load_schema(uri))
+      assert_equal({'type' => 'integer'}, JsonValidator.load_schema(uri).data)
     end
 
     it 'can load schema at URL' do
       uri = Addressable::URI.parse('http://localhost:1234/integer.json')
-      assert_equal({'type' => 'integer'}, JsonValidator.load_schema(uri))
+      assert_equal({'type' => 'integer'}, JsonValidator.load_schema(uri).data)
     end
 
     describe 'caching' do
