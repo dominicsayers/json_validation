@@ -8,18 +8,23 @@ module JsonValidator
 
       def validate(schema, fragment, record)
         path = fragment['$ref']
-        uri = Addressable::URI.parse(path)
 
-        uri_fragment = uri.fragment
-
-        if uri.host.nil?
-          reffed_schema = schema
+        if schema.uri.nil?
+          reffed_uri = Addressable::URI.parse(path)
         else
-          uri.fragment = ''
-          reffed_schema = JsonValidator.load_schema(uri)
+          reffed_uri = Addressable::URI.parse(schema.uri).join(Addressable::URI.parse(path))
         end
 
-        reffed_fragment = look_up_path(reffed_schema, uri_fragment)
+        reffed_uri_fragment = reffed_uri.fragment
+        reffed_uri.fragment = nil
+
+        if reffed_uri.empty?
+          reffed_schema = schema
+        else
+          reffed_schema = JsonValidator.load_schema(reffed_uri)
+        end
+
+        reffed_fragment = look_up_path(reffed_schema, reffed_uri_fragment)
         JsonValidator.validate(reffed_schema, reffed_fragment, record)
       end
 

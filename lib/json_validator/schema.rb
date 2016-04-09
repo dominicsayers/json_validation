@@ -3,7 +3,7 @@ module JsonValidator
     extend Forwardable
     def_delegators :@data, :[], :fetch, :keys, :has_key?
 
-    attr_reader :data
+    attr_reader :data, :uri
 
     def initialize(data, uri)
       @data = data
