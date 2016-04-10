@@ -1,12 +1,9 @@
 module JsonValidator
   module Validators
-    module MinLength
-      extend self
-      extend Validator
-
+    class MinLength < Validator
       type :string
 
-      def validate(schema, fragment, record)
+      def validate(record)
         fragment['minLength'] <= record.size
       end
     end

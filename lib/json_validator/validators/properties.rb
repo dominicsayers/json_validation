@@ -1,19 +1,22 @@
 module JsonValidator
   module Validators
-    module Properties
-      extend self
-      extend Validator
-
+    class Properties < Validator
       type :object
 
-      def validate(schema, fragment, record)
+      def validate(record)
         fragment['properties'].keys.all? {|key|
           if record[key]
-            JsonValidator.validate(schema, fragment['properties'][key], record[key])
+            inner_validators[key].validate(record[key])
           else
             true
           end
         }
+      end
+
+      def inner_validators
+        @inner_validators ||= Hash[fragment['properties'].map {|k, f|
+          [k, build_validator(f)]
+        }]
       end
     end
   end

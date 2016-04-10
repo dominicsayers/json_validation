@@ -1,12 +1,9 @@
 module JsonValidator
   module Validators
-    module ExclusiveMaximum
-      extend self
-      extend Validator
-
+    class ExclusiveMaximum < Validator
       type :number
 
-      def validate(schema, fragment, record)
+      def validate(record)
         true # no-op (handled by Maximum)
       end
     end

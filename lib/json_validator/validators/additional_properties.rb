@@ -1,12 +1,9 @@
 module JsonValidator
   module Validators
-    module AdditionalProperties
-      extend self
-      extend Validator
-
+    class AdditionalProperties < Validator
       type :object
 
-      def validate(schema, fragment, record)
+      def validate(record)
         case fragment['additionalProperties']
         when true
           true
@@ -14,11 +11,15 @@ module JsonValidator
           find_additional_properties(fragment, record).empty?
         when Hash
           find_additional_properties(fragment, record).values.all? {|value|
-            JsonValidator.validate(schema, fragment['additionalProperties'], value)
+            inner_validator.validate(value)
           }
         else
           raise "Unexpected type for fragment['additionalProperties']"
         end
+      end
+
+      def inner_validator
+        @inner_validator ||= build_validator(fragment["additionalProperties"])
       end
 
       def find_additional_properties(fragment, record)

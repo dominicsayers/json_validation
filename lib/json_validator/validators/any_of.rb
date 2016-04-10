@@ -1,13 +1,16 @@
 module JsonValidator
   module Validators
-    module AnyOf
-      extend self
-      extend Validator
-
+    class AnyOf < Validator
       type :any
 
-      def validate(schema, fragment, record)
-        fragment['anyOf'].any? {|any_of_fragment| JsonValidator.validate(schema, any_of_fragment, record)}
+      def validate(record)
+        inner_validators.any? {|validator| validator.validate(record)}
+      end
+
+      def inner_validators
+        @inner_validators ||= fragment["anyOf"].map {|f|
+          build_validator(f)
+        }
       end
     end
   end

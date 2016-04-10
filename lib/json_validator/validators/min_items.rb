@@ -1,12 +1,9 @@
 module JsonValidator
   module Validators
-    module MinItems
-      extend self
-      extend Validator
-
+    class MinItems < Validator
       type :array
 
-      def validate(schema, fragment, record)
+      def validate(record)
         fragment['minItems'] <= record.size
       end
     end

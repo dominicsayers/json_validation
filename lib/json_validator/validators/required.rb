@@ -1,12 +1,9 @@
 module JsonValidator
   module Validators
-    module Required
-      extend self
-      extend Validator
-
+    class Required < Validator
       type :object
 
-      def validate(schema, fragment, record)
+      def validate(record)
         fragment['required'].all? {|element| record.has_key?(element)}
       end
     end

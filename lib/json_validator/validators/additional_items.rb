@@ -1,12 +1,9 @@
 module JsonValidator
   module Validators
-    module AdditionalItems
-      extend self
-      extend Validator
-
+    class AdditionalItems < Validator
       type :array
 
-      def validate(schema, fragment, record)
+      def validate(record)
         if !fragment.has_key?('items') || fragment['items'].is_a?(Hash)
           true
         else
@@ -17,12 +14,16 @@ module JsonValidator
             find_additional_items(fragment, record).empty?
           when Hash
             find_additional_items(fragment, record).all? {|item|
-              JsonValidator.validate(schema, fragment['additionalItems'], item)
+              inner_validator.validate(item)
             }
           else
             raise "Unexpected type for fragment['additionalItems']"
           end
         end
+      end
+
+      def inner_validator
+        @inner_validator ||= build_validator(fragment["additionalItems"])
       end
 
       def find_additional_items(fragment, record)

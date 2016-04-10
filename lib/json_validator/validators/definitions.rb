@@ -1,12 +1,9 @@
 module JsonValidator
   module Validators
-    module Definitions
-      extend self
-      extend Validator
-
+    class Definitions < Validator
       type :any
 
-      def validate(schema, fragment, record)
+      def validate(record)
         true # TODO
       end
     end

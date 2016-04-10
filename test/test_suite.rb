@@ -8,13 +8,13 @@ Dir[File.join(File.dirname(__FILE__), 'json-schema-test-suite', 'tests', 'draft4
       describe test_group['description'] do
         test_group['tests'].each do |test|
           before do
-            @schema = JsonValidator.build_schema(test_group['schema'])
+            @validator = JsonValidator.build_validator(test_group['schema'])
           end
 
           specify test['description'] do
             skip if test_group['description'] == 'change resolution scope'
             record = test['data']
-            assert_equal(test['valid'], JsonValidator.validate(@schema, @schema, record))
+            assert_equal(test["valid"], @validator.validate(record))
           end
         end
       end

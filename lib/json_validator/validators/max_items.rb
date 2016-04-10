@@ -1,12 +1,9 @@
 module JsonValidator
   module Validators
-    module MaxItems
-      extend self
-      extend Validator
-
+    class MaxItems < Validator
       type :array
 
-      def validate(schema, fragment, record)
+      def validate(record)
         fragment['maxItems'] >= record.size
       end
     end

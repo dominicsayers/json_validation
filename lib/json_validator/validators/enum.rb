@@ -1,12 +1,9 @@
 module JsonValidator
   module Validators
-    module Enum
-      extend self
-      extend Validator
-
+    class Enum < Validator
       type :any
 
-      def validate(schema, fragment, record)
+      def validate(record)
         fragment['enum'].include?(record)
       end
     end

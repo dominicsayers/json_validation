@@ -1,12 +1,9 @@
 module JsonValidator
   module Validators
-    module ExclusiveMinimum
-      extend self
-      extend Validator
-
+    class ExclusiveMinimum < Validator
       type :number
 
-      def validate(schema, fragment, record)
+      def validate(record)
         true # no-op (handled by Minimum)
       end
     end

@@ -2,37 +2,36 @@ require 'test_helper'
 
 describe JsonValidator do
   describe '.load_schema' do
+    before do
+      JsonValidator.clear_schema_cache
+    end
+
+    after do
+      JsonValidator.clear_schema_cache
+    end
+
     it 'can load schema on filesystem' do
       path = File.join(File.dirname(__FILE__), 'schemas', 'integer.json')
       uri = Addressable::URI.parse(path)
-      assert_equal({'type' => 'integer'}, JsonValidator.load_schema(uri).data)
+      assert_equal({'type' => 'integer'}, JsonValidator.load_schema(uri))
     end
 
-    it 'can load schema at URL' do
+    it 'can load schema via HTTP' do
       uri = Addressable::URI.parse('http://localhost:1234/integer.json')
-      assert_equal({'type' => 'integer'}, JsonValidator.load_schema(uri).data)
+      assert_equal({'type' => 'integer'}, JsonValidator.load_schema(uri))
     end
 
-    describe 'caching' do
-      before do
-        begin
-          JsonValidator.send(:remove_instance_variable, :@schema_cache)
-        rescue NameError
-        end
+    it 'can load schema when URI has fragment' do
+      uri = Addressable::URI.parse('http://localhost:1234/subSchemas.json#/integer')
+      assert_equal({'type' => 'integer'}, JsonValidator.load_schema(uri))
+    end
 
-        after do
-          JsonValidator.send(:remove_instance_variable, :@schema_cache)
-        end
+    it 'caches schema' do
+      JSON.expects(:parse).once
 
-        it 'caches schema' do
-          JSON.expects(:parse).once
-
-          path = File.join(File.dirname(__FILE__), 'schemas', 'integer.json')
-          uri = Addressable::URI.parse('http://localhost:1234/integer.json')
-          JsonValidator.load_schema(uri)
-          JsonValidator.load_schema(uri)
-        end
-      end
+      uri = Addressable::URI.parse('http://localhost:1234/integer.json')
+      JsonValidator.load_schema(uri)
+      JsonValidator.load_schema(uri)
     end
   end
 end

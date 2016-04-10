@@ -1,12 +1,9 @@
 module JsonValidator
   module Validators
-    module MaxProperties
-      extend self
-      extend Validator
-
+    class MaxProperties < Validator
       type :object
 
-      def validate(schema, fragment, record)
+      def validate(record)
         fragment['maxProperties'] >= record.size
       end
     end

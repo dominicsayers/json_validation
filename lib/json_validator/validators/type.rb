@@ -1,15 +1,12 @@
 module JsonValidator
   module Validators
-    module Type
-      extend self
-      extend Validator
-
+    class Type < Validator
       type :any
 
-      def validate(schema, fragment, record)
+      def validate(record)
         types = Array(fragment['type'])
         types.any? {|type| 
-          klasses = JsonValidator::TYPES_TO_CLASSES.fetch(type)
+          klasses = JsonValidator::TYPES_TO_CLASSES.fetch(type.to_sym)
           klasses.any? {|klass| record.is_a?(klass)}
         }
       end

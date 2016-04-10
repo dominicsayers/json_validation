@@ -1,13 +1,14 @@
 module JsonValidator
   module Validators
-    module Not
-      extend self
-      extend Validator
-
+    class Not < Validator
       type :any
 
-      def validate(schema, fragment, record)
-        !JsonValidator.validate(schema, fragment['not'], record)
+      def validate(record)
+        !inner_validator.validate(record)
+      end
+
+      def inner_validator
+        @inner_validator ||= build_validator(fragment["not"])
       end
     end
   end

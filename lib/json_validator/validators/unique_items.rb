@@ -1,12 +1,9 @@
 module JsonValidator
   module Validators
-    module UniqueItems
-      extend self
-      extend Validator
-
+    class UniqueItems < Validator
       type :array
 
-      def validate(schema, fragment, record)
+      def validate(record)
         if fragment['uniqueItems']
           record.size == record.uniq.size
         else

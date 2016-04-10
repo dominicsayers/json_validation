@@ -1,13 +1,16 @@
 module JsonValidator
   module Validators
-    module OneOf
-      extend self
-      extend Validator
-
+    class OneOf < Validator
       type :any
 
-      def validate(schema, fragment, record)
-        fragment['oneOf'].count {|one_of_fragment| JsonValidator.validate(schema, one_of_fragment, record)} == 1
+      def validate(record)
+        inner_validators.count {|validator| validator.validate(record)} == 1
+      end
+
+      def inner_validators
+        @inner_validators ||= fragment["oneOf"].map {|f|
+          build_validator(f)
+        }
       end
     end
   end

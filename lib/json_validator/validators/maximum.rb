@@ -1,12 +1,9 @@
 module JsonValidator
   module Validators
-    module Maximum
-      extend self
-      extend Validator
-
+    class Maximum < Validator
       type :number
 
-      def validate(schema, fragment, record)
+      def validate(record)
         if fragment['exclusiveMaximum']
           fragment['maximum'] > record
         else

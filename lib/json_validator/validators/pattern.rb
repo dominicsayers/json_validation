@@ -1,12 +1,9 @@
 module JsonValidator
   module Validators
-    module Pattern
-      extend self
-      extend Validator
-
+    class Pattern < Validator
       type :string
 
-      def validate(schema, fragment, record)
+      def validate(record)
         rx = Regexp.new(fragment['pattern'])
         !!rx.match(record)
       end

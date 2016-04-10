@@ -1,18 +1,15 @@
 module JsonValidator
   module Validators
-    module Dependencies
-      extend self
-      extend Validator
-
+    class Dependencies < Validator
       type :object
 
-      def validate(schema, fragment, record)
+      def validate(record)
         fragment['dependencies'].all? {|property, v|
           case v
           when Hash
             dependency_fragment = v
             if record.has_key?(property)
-              JsonValidator.validate(schema, dependency_fragment, record)
+              inner_validators[property].validate(record)
             else
               true
             end
@@ -27,6 +24,12 @@ module JsonValidator
             raise "Unexpected type for fragment['dependencies']['#{property}']"
           end
         }
+      end
+
+      def inner_validators
+        @inner_validators ||= Hash[fragment['dependencies'].map {|k, f|
+          [k, build_validator(f)]
+        }]
       end
     end
   end

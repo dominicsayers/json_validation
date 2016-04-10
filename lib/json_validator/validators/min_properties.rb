@@ -1,12 +1,9 @@
 module JsonValidator
   module Validators
-    module MinProperties
-      extend self
-      extend Validator
-
+    class MinProperties < Validator
       type :object
 
-      def validate(schema, fragment, record)
+      def validate(record)
         fragment['minProperties'] <= record.size
       end
     end
