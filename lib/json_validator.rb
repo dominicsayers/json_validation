@@ -26,6 +26,8 @@ module JsonValidator
   }
 
   def load_validator(uri)
+    uri = Addressable::URI.parse(uri) unless uri.is_a?(Addressable::URI)
+
     schema = load_schema(uri)
     build_validator(schema, uri)
   end
@@ -60,6 +62,8 @@ module JsonValidator
   end
 
   def load_schema(uri)
+    raise unless uri.is_a?(Addressable::URI)
+
     uri = uri.clone
     uri_fragment = uri.fragment
     uri.fragment = nil

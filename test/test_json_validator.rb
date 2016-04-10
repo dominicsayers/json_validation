@@ -1,6 +1,20 @@
 require 'test_helper'
 
 describe JsonValidator do
+  describe '.load_validator' do
+    it 'accepts a String' do
+      uri = 'http://localhost:1234/integer.json'
+      validator = JsonValidator.load_validator(uri)
+      assert(validator.validate(3))
+    end
+
+    it 'accepts an Addressable::URI' do
+      uri = Addressable::URI.parse('http://localhost:1234/integer.json')
+      validator = JsonValidator.load_validator(uri)
+      assert(validator.validate(3))
+    end
+  end
+
   describe '.load_schema' do
     before do
       JsonValidator.clear_schema_cache
