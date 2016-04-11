@@ -68,6 +68,10 @@ This suite is being used by:
 
 * [json_schema](https://github.com/patefacio/json_schema) 
 
+### Elixir ###
+
+* [ex_json_schema](https://github.com/jonasschmidt/ex_json_schema)
+
 ### Erlang ###
 
 * [jesse](https://github.com/klarna/jesse)
@@ -75,6 +79,7 @@ This suite is being used by:
 ### Go ###
 
 * [gojsonschema](https://github.com/sigu-399/gojsonschema) 
+* [validate-json](https://github.com/cesanta/validate-json)
 
 ### Haskell ###
 
@@ -85,7 +90,7 @@ This suite is being used by:
 
 * [json-schema-validator](https://github.com/fge/json-schema-validator)
 
-### Javascript ###
+### JavaScript ###
 
 * [json-schema-benchmark](https://github.com/Muscula/json-schema-benchmark)
 * [direct-schema](https://github.com/IreneKnapp/direct-schema)
@@ -99,6 +104,16 @@ This suite is being used by:
 * [skeemas](https://github.com/Prestaul/skeemas)
 * [tv4](https://github.com/geraintluff/tv4)
 * [z-schema](https://github.com/zaggino/z-schema)
+* [jsen](https://github.com/bugventure/jsen)
+* [ajv](https://github.com/epoberezkin/ajv)
+
+### Node.js ###
+
+The JSON Schema Test Suite is also available as an
+[npm](https://www.npmjs.com/package/json-schema-test-suite) package.
+Node-specific support is maintained on the [node branch](https://github.com/json-schema/JSON-Schema-Test-Suite/tree/node).
+See [NODE-README.md](https://github.com/json-schema/JSON-Schema-Test-Suite/blob/node/NODE-README.md)
+for more information.
 
 ### .NET ###
 
@@ -120,6 +135,10 @@ This suite is being used by:
 
 * [valico](https://github.com/rustless/valico)
 
+### Swift ###
+
+* [JSONSchema](https://github.com/kylef/JSONSchema.swift)
+
 If you use it as well, please fork and send a pull request adding yourself to
 the list :).
 
@@ -129,5 +148,5 @@ Contributing
 If you see something missing or incorrect, a pull request is most welcome!
 
 There are some sanity checks in place for testing the test suite. You can run
-them with `bin/jsonschema_suite check`. They will be run automatically by
+them with `bin/jsonschema_suite check` or `tox`. They will be run automatically by
 [Travis CI](https://travis-ci.org/) as well.
