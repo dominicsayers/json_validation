@@ -1,6 +1,9 @@
 require 'test_helper'
 
-Dir[File.join(File.dirname(__FILE__), 'json-schema-test-suite', 'tests', 'draft4', '*.json')].each do |path|
+base_path = File.join(File.dirname(__FILE__), 'json-schema-test-suite', 'tests', 'draft4')
+test_paths = Dir[File.join(base_path, '*.json')] + Dir[File.join(base_path, 'optional', '*.json')]
+
+test_paths.each do |path|
   describe File.basename(path, '.json') do
     test_groups = JSON.load(File.read(path))
 
@@ -12,6 +15,8 @@ Dir[File.join(File.dirname(__FILE__), 'json-schema-test-suite', 'tests', 'draft4
           end
 
           specify test['description'] do
+            skip if File.basename(path, '.json') == 'format'
+
             record = test['data']
             assert_equal(test["valid"], @validator.validate(record))
           end
