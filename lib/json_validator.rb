@@ -112,4 +112,20 @@ module JsonValidator
       cache[uri] = JSON.parse(open(uri).read)
     }
   end
+
+  def get_format_validator(key)
+    format_validators.fetch(key).new
+  end
+
+  def add_format_validator(key, format_validator)
+    format_validators[key] = format_validator
+  end
+
+  def clear_format_validators
+    @format_validators = nil
+  end
+
+  def format_validators
+    @format_validators ||= {}
+  end
 end

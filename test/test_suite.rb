@@ -5,6 +5,8 @@ test_paths = Dir[File.join(base_path, '*.json')] + Dir[File.join(base_path, 'opt
 
 test_paths.each do |path|
   describe File.basename(path, '.json') do
+    next if File.basename(path, '.json') == 'format'
+
     test_groups = JSON.load(File.read(path))
 
     test_groups.each do |test_group|
@@ -15,8 +17,6 @@ test_paths.each do |path|
           end
 
           specify test['description'] do
-            skip if File.basename(path, '.json') == 'format'
-
             record = test['data']
             assert_equal(test["valid"], @validator.validate(record))
           end
