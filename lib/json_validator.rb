@@ -38,6 +38,10 @@ module JsonValidator
       schema_cache[base_uri] = schema
     end
 
+    if schema["id"]
+      base_uri = base_uri.join(Addressable::URI.parse(schema["id"]))
+    end
+
     validators = schema.keys.map {|key|
       if key == '$ref'
         validator_name = 'Ref'

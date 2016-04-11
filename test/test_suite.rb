@@ -12,7 +12,6 @@ Dir[File.join(File.dirname(__FILE__), 'json-schema-test-suite', 'tests', 'draft4
           end
 
           specify test['description'] do
-            skip if test_group['description'] == 'change resolution scope'
             record = test['data']
             assert_equal(test["valid"], @validator.validate(record))
           end
