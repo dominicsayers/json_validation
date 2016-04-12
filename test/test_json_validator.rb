@@ -15,6 +15,14 @@ describe JsonValidator do
     end
   end
 
+  describe '.build_validator' do
+    it 'accepts a hash' do
+      schema = {'type' => 'integer'}
+      validator = JsonValidator.build_validator(schema)
+      assert(validator.validate(3))
+    end
+  end
+
   describe '.load_schema' do
     before do
       JsonValidator.clear_schema_cache
