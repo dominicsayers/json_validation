@@ -1,6 +1,6 @@
-# JsonValidator
+# JsonValidation
 
-JsonValidator validates JSON according to a [JSON Schema](http://json-schema.org/documentation.html).
+JsonValidation validates JSON according to a [JSON Schema](http://json-schema.org/documentation.html).
 
 It is designed to validate as quickly as possible.
 
@@ -17,7 +17,7 @@ It is designed to validate as quickly as possible.
 
 Add this line to your application's Gemfile:
 
-    gem 'json_validator'
+    gem 'json_validation'
 
 And then execute:
 
@@ -25,22 +25,22 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install json_validator
+    $ gem install json_validation
 
 
 ## Usage
 
 Load the library:
 
-    require "json_validator"
+    require "json_validation"
 
 Build a validator from a hash representing a JSON schema:
 
-    validator = JsonValidator.build_validator(schema)
+    validator = JsonValidation.build_validator(schema)
 
 Load a validator from a schema at a URL or path:
 
-    validator = JsonValidator.load_validator(uri)
+    validator = JsonValidation.load_validator(uri)
 
 Use the validator to validate whether a record validates against a schema.
 

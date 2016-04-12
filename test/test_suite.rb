@@ -13,7 +13,7 @@ test_paths.each do |path|
       describe test_group['description'] do
         test_group['tests'].each do |test|
           before do
-            @validator = JsonValidator.build_validator(test_group['schema'])
+            @validator = JsonValidation.build_validator(test_group['schema'])
           end
 
           specify test['description'] do

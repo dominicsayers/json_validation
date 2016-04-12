@@ -2,7 +2,7 @@ require 'minitest/autorun'
 require 'minitest/reporters'
 require 'mocha/mini_test'
 
-require 'json_validator'
+require 'json_validation'
 
 #Minitest::Reporters.use!(Minitest::Reporters::SpecReporter.new)
 

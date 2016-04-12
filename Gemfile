@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in json_validator.gemspec
+# Specify your gem's dependencies in json_validation.gemspec
 gemspec
 
 group :development do
