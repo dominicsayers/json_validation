@@ -48,6 +48,25 @@ Use the validator to validate whether a record validates against a schema.
     # => returns true or false
 
 
+### Format validation
+
+To validate a record against a format, define a validator class with a
+`#validate` method:
+
+    class DateTimeFormatValidator
+      def validate(record)
+        Date.parse(record)
+        true
+      rescue ArgumentError
+        false
+      end
+    end
+
+Then, register the validator:
+
+    JsonValidation.add_format_validator("date-time", DateTimeFormatValidator)
+
+
 ## Contributing
 
 If you find an example of a record being incorrectly validated against a
