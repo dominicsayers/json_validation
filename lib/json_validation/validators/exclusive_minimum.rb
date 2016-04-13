@@ -4,7 +4,7 @@ module JsonValidation
       type :number
 
       def validate(record)
-        true # no-op (handled by Minimum)
+        fragment['minimum'] < record
       end
     end
   end

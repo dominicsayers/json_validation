@@ -4,11 +4,7 @@ module JsonValidation
       type :number
 
       def validate(record)
-        if fragment['exclusiveMaximum']
-          fragment['maximum'] > record
-        else
-          fragment['maximum'] >= record
-        end
+        fragment['maximum'] >= record
       end
     end
   end

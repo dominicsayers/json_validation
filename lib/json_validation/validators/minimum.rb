@@ -4,11 +4,7 @@ module JsonValidation
       type :number
 
       def validate(record)
-        if fragment['exclusiveMinimum']
-          fragment['minimum'] < record
-        else
-          fragment['minimum'] <= record
-        end
+        fragment['minimum'] <= record
       end
     end
   end
