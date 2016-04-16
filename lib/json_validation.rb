@@ -25,6 +25,9 @@ module JsonValidation
     :any => [Object],
   }
 
+  class ValidationFailure
+  end
+
   def load_validator(uri)
     uri = Addressable::URI.parse(uri) unless uri.is_a?(Addressable::URI)
 

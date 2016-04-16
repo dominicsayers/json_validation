@@ -13,12 +13,20 @@ module JsonValidation
     end
 
     def validate(record)
-      validators.all? {|validator|
-        if TYPES_TO_CLASSES[validator.class.type].any? {|klass| record.is_a?(klass)}
-          validator.validate(record)
-        else
-          true
-        end
+      validators_for_record(record).all? {|validator|
+        validator.validate(record)
+      }
+    end
+
+    def validate_with_errors(record)
+      validators_for_record(record).map {|validator|
+        validator.validate_with_errors(record)
+      }.flatten.compact
+    end
+
+    def validators_for_record(record)
+      validators.select {|validator|
+        TYPES_TO_CLASSES[validator.class.type].any? {|klass| record.is_a?(klass)}
       }
     end
 

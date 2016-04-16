@@ -16,6 +16,14 @@ module JsonValidation
         @base_uri = base_uri
       end
 
+      def validate_with_errors(record)
+        if validate(record)
+          nil
+        else
+          ValidationFailure.new
+        end
+      end
+
       def build_validator(schema)
         JsonValidation.build_validator(schema, base_uri)
       end

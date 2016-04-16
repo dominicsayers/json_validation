@@ -20,6 +20,12 @@ test_paths.each do |path|
             record = test['data']
             begin
               assert_equal(test["valid"], @validator.validate(record))
+
+              if test["valid"]
+                assert(@validator.validate_with_errors(record).empty?)
+              else
+                assert(!@validator.validate_with_errors(record).empty?)
+              end
             rescue SocketError
               # We're not connected to the internet
               raise unless test_group['schema'] == {"$ref" => "http://json-schema.org/draft-04/schema#"}
