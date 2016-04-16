@@ -18,16 +18,16 @@ describe JsonValidation::SchemaValidator do
       schema = {"type" => "string", "minimum" => 10, "maximum" => 20}
       validator = JsonValidation.build_validator(schema)
       errors = validator.validate_with_errors(3)
-      failing_attributes = errors.map(&:failing_attribute).sort
-      assert_equal(failing_attributes, ["minimum", "type"])
+      schema_attributes = errors.map(&:schema_attribute).sort
+      assert_equal(schema_attributes, ["minimum", "type"])
     end
 
     it "collects failing schema attribute for each error" do
       schema = {"type" => "string", "minimum" => 10, "maximum" => 20}
       validator = JsonValidation.build_validator(schema)
       errors = validator.validate_with_errors(3)
-      failing_attributes = errors.map(&:failing_attribute).sort
-      assert_equal(failing_attributes, ["minimum", "type"])
+      schema_attributes = errors.map(&:schema_attribute).sort
+      assert_equal(schema_attributes, ["minimum", "type"])
     end
 
     describe "properties" do
@@ -44,8 +44,8 @@ describe JsonValidation::SchemaValidator do
 
         validator = JsonValidation.build_validator(schema)
         errors = validator.validate_with_errors({"a" => 3})
-        failing_attributes = errors.map(&:failing_attribute).sort
-        assert_equal(failing_attributes, ["minimum", "type"])
+        schema_attributes = errors.map(&:schema_attribute).sort
+        assert_equal(schema_attributes, ["minimum", "type"])
       end
     end
 
@@ -67,8 +67,8 @@ describe JsonValidation::SchemaValidator do
 
         validator = JsonValidation.build_validator(schema)
         errors = validator.validate_with_errors({"a" => {"b" => 3}})
-        failing_attributes = errors.map(&:failing_attribute).sort
-        assert_equal(failing_attributes, ["minimum", "type"])
+        schema_attributes = errors.map(&:schema_attribute).sort
+        assert_equal(schema_attributes, ["minimum", "type"])
       end
     end
 
@@ -86,8 +86,8 @@ describe JsonValidation::SchemaValidator do
 
         validator = JsonValidation.build_validator(schema)
         errors = validator.validate_with_errors({"a" => 3})
-        failing_attributes = errors.map(&:failing_attribute).sort
-        assert_equal(failing_attributes, ["minimum", "type"])
+        schema_attributes = errors.map(&:schema_attribute).sort
+        assert_equal(schema_attributes, ["minimum", "type"])
       end
     end
   end
