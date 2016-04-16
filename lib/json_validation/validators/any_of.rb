@@ -8,7 +8,7 @@ module JsonValidation
       end
 
       def inner_validators
-        @inner_validators ||= fragment["anyOf"].map {|f|
+        @inner_validators ||= schema["anyOf"].map {|f|
           build_validator(f)
         }
       end

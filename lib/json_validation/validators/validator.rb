@@ -9,19 +9,19 @@ module JsonValidation
         end
       end
 
-      attr_reader :fragment, :base_uri
+      attr_reader :schema, :base_uri
 
-      def initialize(fragment, base_uri)
-        @fragment = fragment
+      def initialize(schema, base_uri)
+        @schema = schema
         @base_uri = base_uri
       end
 
-      def build_validator(fragment)
-        JsonValidation.build_validator(fragment, base_uri)
+      def build_validator(schema)
+        JsonValidation.build_validator(schema, base_uri)
       end
 
-      def build_validator_with_new_base_uri(fragment, base_uri)
-        JsonValidation.build_validator(fragment, base_uri)
+      def build_validator_with_new_base_uri(schema, base_uri)
+        JsonValidation.build_validator(schema, base_uri)
       end
     end
   end

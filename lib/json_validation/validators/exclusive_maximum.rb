@@ -4,7 +4,7 @@ module JsonValidation
       type :number
 
       def validate(record)
-        fragment['maximum'] > record
+        schema['maximum'] > record
       end
     end
   end

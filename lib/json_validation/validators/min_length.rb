@@ -4,7 +4,7 @@ module JsonValidation
       type :string
 
       def validate(record)
-        fragment['minLength'] <= record.size
+        schema['minLength'] <= record.size
       end
     end
   end

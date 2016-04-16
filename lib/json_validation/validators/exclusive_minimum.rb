@@ -4,7 +4,7 @@ module JsonValidation
       type :number
 
       def validate(record)
-        fragment['minimum'] < record
+        schema['minimum'] < record
       end
     end
   end

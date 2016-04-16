@@ -4,7 +4,7 @@ module JsonValidation
       type :object
 
       def validate(record)
-        fragment['required'].all? {|element| record.has_key?(element)}
+        schema['required'].all? {|element| record.has_key?(element)}
       end
     end
   end

@@ -4,7 +4,7 @@ module JsonValidation
       type :number
 
       def validate(record)
-        BigDecimal.new(record.to_s) % BigDecimal.new(fragment['multipleOf'].to_s) == 0
+        BigDecimal.new(record.to_s) % BigDecimal.new(schema['multipleOf'].to_s) == 0
       end
     end
   end

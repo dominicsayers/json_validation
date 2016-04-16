@@ -4,7 +4,7 @@ module JsonValidation
       type :string
 
       def validate(record)
-        rx = Regexp.new(fragment['pattern'])
+        rx = Regexp.new(schema['pattern'])
         !!rx.match(record)
       end
     end

@@ -8,7 +8,7 @@ module JsonValidation
       end
 
       def inner_validator
-        @inner_validator ||= JsonValidation.get_format_validator(fragment["format"])
+        @inner_validator ||= JsonValidation.get_format_validator(schema["format"])
       end
     end
   end

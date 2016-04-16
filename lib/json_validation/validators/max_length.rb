@@ -4,7 +4,7 @@ module JsonValidation
       type :string
 
       def validate(record)
-        fragment['maxLength'] >= record.size
+        schema['maxLength'] >= record.size
       end
     end
   end

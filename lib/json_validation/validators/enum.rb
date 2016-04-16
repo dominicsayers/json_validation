@@ -4,7 +4,7 @@ module JsonValidation
       type :any
 
       def validate(record)
-        fragment['enum'].include?(record)
+        schema['enum'].include?(record)
       end
     end
   end

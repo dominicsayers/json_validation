@@ -4,7 +4,7 @@ module JsonValidation
       type :object
 
       def validate(record)
-        fragment['properties'].keys.all? {|key|
+        schema['properties'].keys.all? {|key|
           if record[key]
             inner_validators[key].validate(record[key])
           else
@@ -14,7 +14,7 @@ module JsonValidation
       end
 
       def inner_validators
-        @inner_validators ||= Hash[fragment['properties'].map {|k, f|
+        @inner_validators ||= Hash[schema['properties'].map {|k, f|
           [k, build_validator(f)]
         }]
       end
