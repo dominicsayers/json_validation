@@ -4,7 +4,7 @@ require 'open-uri'
 
 require 'addressable/uri'
 
-require 'json_validation/validator_collection'
+require 'json_validation/schema_validator'
 require 'json_validation/validators/validator'
 Dir[File.join(File.dirname(__FILE__), 'json_validation', 'validators', '*.rb')].each do |path|
   require path
@@ -38,27 +38,7 @@ module JsonValidation
       schema_cache[base_uri] = schema
     end
 
-    if schema["id"]
-      base_uri = base_uri.join(Addressable::URI.parse(schema["id"]))
-    end
-
-    validators = schema.keys.map {|key|
-      if key == '$ref'
-        validator_name = 'Ref'
-      else
-        validator_name = key[0].upcase + key[1..-1]
-      end
-
-      begin
-        klass = JsonValidation::Validators.const_get(:"#{validator_name}")
-      rescue NameError
-        nil
-      else
-        klass.new(schema, base_uri)
-      end
-    }.compact
-
-    ValidatorCollection.new(validators)
+    SchemaValidator.new(schema, base_uri)
   end
 
   def generate_uri(schema)
