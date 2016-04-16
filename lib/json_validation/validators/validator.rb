@@ -16,11 +16,16 @@ module JsonValidation
         @base_uri = base_uri
       end
 
+      def attribute_name
+        class_name = self.class.name.split("::").last
+        class_name[0].downcase + class_name[1..-1]
+      end
+
       def validate_with_errors(record)
         if validate(record)
           nil
         else
-          ValidationFailure.new
+          ValidationFailure.new(attribute_name)
         end
       end
 

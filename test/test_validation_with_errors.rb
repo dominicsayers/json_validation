@@ -13,5 +13,82 @@ describe JsonValidation::SchemaValidator do
       validator = JsonValidation.build_validator(schema)
       assert_equal(validator.validate_with_errors(3).size, 2)
     end
+
+    it "collects failing schema attribute for each error" do
+      schema = {"type" => "string", "minimum" => 10, "maximum" => 20}
+      validator = JsonValidation.build_validator(schema)
+      errors = validator.validate_with_errors(3)
+      failing_attributes = errors.map(&:failing_attribute).sort
+      assert_equal(failing_attributes, ["minimum", "type"])
+    end
+
+    it "collects failing schema attribute for each error" do
+      schema = {"type" => "string", "minimum" => 10, "maximum" => 20}
+      validator = JsonValidation.build_validator(schema)
+      errors = validator.validate_with_errors(3)
+      failing_attributes = errors.map(&:failing_attribute).sort
+      assert_equal(failing_attributes, ["minimum", "type"])
+    end
+
+    describe "properties" do
+      it "collects failing schema attribute for each error" do
+        schema = {
+          "properties" => {
+            "a" => {
+              "type" => "string",
+              "minimum" => 10,
+              "maximum" => 20
+            }
+          }
+        }
+
+        validator = JsonValidation.build_validator(schema)
+        errors = validator.validate_with_errors({"a" => 3})
+        failing_attributes = errors.map(&:failing_attribute).sort
+        assert_equal(failing_attributes, ["minimum", "type"])
+      end
+    end
+
+    describe "nested properties" do
+      it "collects failing schema attribute for each error" do
+        schema = {
+          "properties" => {
+            "a" => {
+              "properties" => {
+                "b" => {
+                  "type" => "string",
+                  "minimum" => 10,
+                  "maximum" => 20
+                }
+              }
+            }
+          }
+        }
+
+        validator = JsonValidation.build_validator(schema)
+        errors = validator.validate_with_errors({"a" => {"b" => 3}})
+        failing_attributes = errors.map(&:failing_attribute).sort
+        assert_equal(failing_attributes, ["minimum", "type"])
+      end
+    end
+
+    describe "patternProperties" do
+      it "collects failing schema attribute for each error" do
+        schema = {
+          "patternProperties" => {
+            "ab?" => {
+              "type" => "string",
+              "minimum" => 10,
+              "maximum" => 20
+            }
+          }
+        }
+
+        validator = JsonValidation.build_validator(schema)
+        errors = validator.validate_with_errors({"a" => 3})
+        failing_attributes = errors.map(&:failing_attribute).sort
+        assert_equal(failing_attributes, ["minimum", "type"])
+      end
+    end
   end
 end

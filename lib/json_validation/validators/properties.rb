@@ -13,6 +13,16 @@ module JsonValidation
         }
       end
 
+      def validate_with_errors(record)
+        schema['properties'].keys.map {|key|
+          if record[key]
+            inner_validators[key].validate_with_errors(record[key])
+          else
+            nil
+          end
+        }
+      end
+
       def inner_validators
         @inner_validators ||= Hash[schema['properties'].map {|k, f|
           [k, build_validator(f)]

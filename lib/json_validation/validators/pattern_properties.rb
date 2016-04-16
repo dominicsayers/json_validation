@@ -12,6 +12,15 @@ module JsonValidation
         }
       end
 
+      def validate_with_errors(record)
+        schema['patternProperties'].keys.map {|pattern|
+          rx = Regexp.new(pattern)
+          record.select {|k, v| rx.match(k)}.map {|k, v|
+            inner_validators[pattern].validate_with_errors(v)
+          }
+        }
+      end
+
       def inner_validators
         @inner_validators ||= Hash[schema['patternProperties'].map {|pattern, f|
           [pattern, build_validator(f)]

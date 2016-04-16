@@ -25,7 +25,7 @@ module JsonValidation
     :any => [Object],
   }
 
-  class ValidationFailure
+  class ValidationFailure < Struct.new(:failing_attribute)
   end
 
   def load_validator(uri)
