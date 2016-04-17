@@ -5,6 +5,7 @@ require 'open-uri'
 require 'addressable/uri'
 
 require 'json_validation/schema_validator'
+require 'json_validation/validation_failure'
 require 'json_validation/validators/validator'
 Dir[File.join(File.dirname(__FILE__), 'json_validation', 'validators', '*.rb')].each do |path|
   require path
@@ -24,9 +25,6 @@ module JsonValidation
     :string => [String],
     :any => [Object],
   }
-
-  class ValidationFailure < Struct.new(:schema_attribute)
-  end
 
   def load_validator(uri)
     uri = Addressable::URI.parse(uri) unless uri.is_a?(Addressable::URI)
