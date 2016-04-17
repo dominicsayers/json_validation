@@ -25,7 +25,13 @@ module JsonValidation
         if validate(record)
           nil
         else
-          ValidationFailure.new(attribute_name)
+          ValidationFailure.new(
+            schema: schema,
+            schema_uri: nil,  # TODO
+            schema_attribute: attribute_name,
+            value: record,
+            value_path: nil,  # TODO
+          )
         end
       end
 
