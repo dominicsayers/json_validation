@@ -22,14 +22,6 @@ describe JsonValidation::SchemaValidator do
       assert_equal(schema_attributes, ["minimum", "type"])
     end
 
-    it "collects failing schema attribute for each error" do
-      schema = {"type" => "string", "minimum" => 10, "maximum" => 20}
-      validator = JsonValidation.build_validator(schema)
-      errors = validator.validate_with_errors(3)
-      schema_attributes = errors.map(&:schema_attribute).sort
-      assert_equal(schema_attributes, ["minimum", "type"])
-    end
-
     describe "properties" do
       it "collects failing schema attribute for each error" do
         schema = {
