@@ -1,9 +1,10 @@
 module JsonValidation
   class SchemaValidator
-    attr_reader :schema, :base_uri
+    attr_reader :schema, :uri, :base_uri
 
-    def initialize(schema, base_uri)
+    def initialize(schema, uri, base_uri)
       @schema = schema
+      @uri = uri
 
       if schema["id"]
         @base_uri = base_uri.join(Addressable::URI.parse(schema["id"]))
@@ -44,7 +45,7 @@ module JsonValidation
         rescue NameError
           nil
         else
-          klass.new(schema, base_uri)
+          klass.new(schema, uri, base_uri)
         end
       }.compact
     end

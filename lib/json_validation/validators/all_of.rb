@@ -8,8 +8,8 @@ module JsonValidation
       end
 
       def inner_validators
-        @inner_validators ||= schema["allOf"].map {|f|
-          build_validator(f)
+        @inner_validators ||= schema["allOf"].each_with_index.map {|f, ix|
+          build_validator(f, "allOf/#{ix}")
         }
       end
     end

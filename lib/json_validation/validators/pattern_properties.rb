@@ -23,7 +23,7 @@ module JsonValidation
 
       def inner_validators
         @inner_validators ||= Hash[schema['patternProperties'].map {|pattern, f|
-          [pattern, build_validator(f)]
+          [pattern, build_validator(f, "patternProperties/#{pattern}")]
         }]
       end
     end

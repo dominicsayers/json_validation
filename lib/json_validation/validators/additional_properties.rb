@@ -19,7 +19,7 @@ module JsonValidation
       end
 
       def inner_validator
-        @inner_validator ||= build_validator(schema["additionalProperties"])
+        @inner_validator ||= build_validator(schema["additionalProperties"], "additionalProperties")
       end
 
       def find_additional_properties(schema, record)

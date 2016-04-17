@@ -30,16 +30,20 @@ module JsonValidation
     uri = Addressable::URI.parse(uri) unless uri.is_a?(Addressable::URI)
 
     schema = load_schema(uri)
-    build_validator(schema, uri)
+    build_validator(schema, uri, uri)
   end
 
-  def build_validator(schema, base_uri = nil)
+  def build_validator(schema, uri = nil, base_uri = nil)
+    if uri.nil?
+      uri = "#/"
+    end
+
     if base_uri.nil?
       base_uri = generate_uri(schema)
       schema_cache[base_uri] = schema
     end
 
-    SchemaValidator.new(schema, base_uri)
+    SchemaValidator.new(schema, uri, base_uri)
   end
 
   def generate_uri(schema)

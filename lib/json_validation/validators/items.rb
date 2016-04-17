@@ -18,13 +18,13 @@ module JsonValidation
 
       def inner_validator
         raise unless schema["items"].is_a?(Hash)
-        @inner_validator ||= build_validator(schema["items"])
+        @inner_validator ||= build_validator(schema["items"], "items")
       end
 
       def inner_validators
         raise unless schema["items"].is_a?(Array)
-        @inner_validators ||= schema["items"].map {|f|
-          build_validator(f)
+        @inner_validators ||= schema["items"].each_with_index.map {|f, ix|
+          build_validator(f, "items/#{ix}")
         }
       end
     end

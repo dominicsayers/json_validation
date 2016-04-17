@@ -25,6 +25,11 @@ describe JsonValidation::SchemaValidator do
         assert_equal(schemas, [schema, schema])
       end
 
+      it "collects failing schema uri for each error" do
+        schema_uris = @errors.map(&:schema_uri)
+        assert_equal(schema_uris, ["#/", "#/"])
+      end
+
       it "collects failing value for each error" do
         values = @errors.map(&:value)
         assert_equal(values, [3, 3])
@@ -63,6 +68,11 @@ describe JsonValidation::SchemaValidator do
         assert_equal(schemas, [schema, schema])
       end
 
+      it "collects failing schema uri for each error" do
+        schema_uris = @errors.map(&:schema_uri)
+        assert_equal(schema_uris, ["#/properties/a", "#/properties/a"])
+      end
+
       it "collects failing value for each error" do
         values = @errors.map(&:value)
         assert_equal(values, [3, 3])
@@ -98,6 +108,11 @@ describe JsonValidation::SchemaValidator do
         schemas = @errors.map(&:schema)
         schema = {"type" => "string", "minimum" => 10, "maximum" => 20}
         assert_equal(schemas, [schema, schema])
+      end
+
+      it "collects failing schema uri for each error" do
+        schema_uris = @errors.map(&:schema_uri)
+        assert_equal(schema_uris, ["#/properties/a/properties/b", "#/properties/a/properties/b"])
       end
 
       it "collects failing value for each error" do
