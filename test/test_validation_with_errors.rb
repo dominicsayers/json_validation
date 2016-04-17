@@ -8,34 +8,32 @@ describe JsonValidation::SchemaValidator do
       assert(validator.validate_with_errors(3).empty?)
     end
 
-    it "returns error for each validation failure for invalid record" do
-      schema = {"type" => "string", "minimum" => 10, "maximum" => 20}
-      validator = JsonValidation.build_validator(schema)
-      assert_equal(validator.validate_with_errors(3).size, 2)
-    end
+    describe "simple value" do
+      before do
+        schema = {"type" => "string", "minimum" => 10, "maximum" => 20}
+        validator = JsonValidation.build_validator(schema)
+        @errors = validator.validate_with_errors(3)
+      end
 
-    it "collects failing schema for each error" do
-      schema = {"type" => "string", "minimum" => 10, "maximum" => 20}
-      validator = JsonValidation.build_validator(schema)
-      errors = validator.validate_with_errors(3)
-      schemas = errors.map(&:schema)
-      assert_equal(schemas, [schema, schema])
-    end
+      it "returns error for each validation failure for invalid record" do
+        assert_equal(@errors.size, 2)
+      end
 
-    it "collects failing value for each error" do
-      schema = {"type" => "string", "minimum" => 10, "maximum" => 20}
-      validator = JsonValidation.build_validator(schema)
-      errors = validator.validate_with_errors(3)
-      values = errors.map(&:value)
-      assert_equal(values, [3, 3])
-    end
+      it "collects failing schema for each error" do
+        schemas = @errors.map(&:schema)
+        schema = {"type" => "string", "minimum" => 10, "maximum" => 20}
+        assert_equal(schemas, [schema, schema])
+      end
 
-    it "collects failing schema attribute for each error" do
-      schema = {"type" => "string", "minimum" => 10, "maximum" => 20}
-      validator = JsonValidation.build_validator(schema)
-      errors = validator.validate_with_errors(3)
-      schema_attributes = errors.map(&:schema_attribute).sort
-      assert_equal(schema_attributes, ["minimum", "type"])
+      it "collects failing value for each error" do
+        values = @errors.map(&:value)
+        assert_equal(values, [3, 3])
+      end
+
+      it "collects failing schema attribute for each error" do
+        schema_attributes = @errors.map(&:schema_attribute).sort
+        assert_equal(schema_attributes, ["minimum", "type"])
+      end
     end
 
     describe "properties" do
