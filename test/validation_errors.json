@@ -1,0 +1,150 @@
+[
+    {
+        "description": "simple value",
+        "schema": {
+            "type": "string",
+            "minimum": 10,
+            "maximum": 20
+        },
+        "value": 3,
+        "errors": [
+            {
+                "schema": {
+                    "type": "string",
+                    "minimum": 10,
+                    "maximum": 20
+                },
+                "schema_uri": "#/",
+                "schema_attribute": "minimum",
+                "value": 3
+            },
+            {
+                "schema": {
+                    "type": "string",
+                    "minimum": 10,
+                    "maximum": 20
+                },
+                "schema_uri": "#/",
+                "schema_attribute": "type",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "description": "properties",
+        "schema": {
+            "properties": {
+                "a": {
+                    "type": "string",
+                    "minimum": 10,
+                    "maximum": 20
+                }
+            }
+        },
+        "value": {
+            "a": 3
+        },
+        "errors": [
+            {
+                "schema": {
+                    "type": "string",
+                    "minimum": 10,
+                    "maximum": 20
+                },
+                "schema_uri": "#/properties/a",
+                "schema_attribute": "minimum",
+                "value": 3
+            },
+            {
+                "schema": {
+                    "type": "string",
+                    "minimum": 10,
+                    "maximum": 20
+                },
+                "schema_uri": "#/properties/a",
+                "schema_attribute": "type",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "description": "nested properties",
+        "schema": {
+            "properties": {
+                "a": {
+                    "properties": {
+                        "b": {
+                            "type": "string",
+                            "minimum": 10,
+                            "maximum": 20
+                        }
+                    }
+                }
+            }
+        },
+        "value": {
+            "a": {
+                "b": 3
+            }
+        },
+        "errors": [
+            {
+                "schema": {
+                    "type": "string",
+                    "minimum": 10,
+                    "maximum": 20
+                },
+                "schema_uri": "#/properties/a/properties/b",
+                "schema_attribute": "minimum",
+                "value": 3
+            },
+            {
+                "schema": {
+                    "type": "string",
+                    "minimum": 10,
+                    "maximum": 20
+                },
+                "schema_uri": "#/properties/a/properties/b",
+                "schema_attribute": "type",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "description": "patternProperties",
+        "schema": {
+            "patternProperties": {
+                "ab?": {
+                    "type": "string",
+                    "minimum": 10,
+                    "maximum": 20
+                }
+            }
+        },
+        "value": {
+            "a": 3
+        },
+        "errors": [
+            {
+                "schema": {
+                    "type": "string",
+                    "minimum": 10,
+                    "maximum": 20
+                },
+                "schema_uri": "#/patternProperties/ab?",
+                "schema_attribute": "minimum",
+                "value": 3
+            },
+            {
+                "schema": {
+                    "type": "string",
+                    "minimum": 10,
+                    "maximum": 20
+                },
+                "schema_uri": "#/patternProperties/ab?",
+                "schema_attribute": "type",
+                "value": 3
+            }
+        ]
+    }
+]
