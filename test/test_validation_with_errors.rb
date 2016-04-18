@@ -18,7 +18,7 @@ describe "validation errors" do
               [error.schema_uri, error.schema_attribute]
             }
 
-            assert_equal(errors.size, test_case["errors"].size, "Expected #{test_case["errors"].size} errors, got #{errors.size} errors")
+            assert_equal(test_case["errors"].size, errors.size, "Expected #{test_case["errors"].size} errors, got #{errors.size} errors")
 
             errors.zip(test_case["errors"]).each do |error, expected_error|
               assert_equal(expected_error["schema"], error.schema)
