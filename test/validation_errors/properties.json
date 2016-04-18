@@ -1,38 +1,5 @@
 [
     {
-        "description": "simple value",
-        "schema": {
-            "type": "string",
-            "minimum": 10,
-            "maximum": 20
-        },
-        "value": 3,
-        "errors": [
-            {
-                "schema": {
-                    "type": "string",
-                    "minimum": 10,
-                    "maximum": 20
-                },
-                "schema_uri": "#/",
-                "schema_attribute": "minimum",
-                "value": 3,
-                "value_path": "#"
-            },
-            {
-                "schema": {
-                    "type": "string",
-                    "minimum": 10,
-                    "maximum": 20
-                },
-                "schema_uri": "#/",
-                "schema_attribute": "type",
-                "value": 3,
-                "value_path": "#"
-            }
-        ]
-    },
-    {
         "description": "properties",
         "schema": {
             "properties": {
@@ -113,45 +80,6 @@
                 "schema_attribute": "type",
                 "value": 3,
                 "value_path": "#/a/b"
-            }
-        ]
-    },
-    {
-        "description": "patternProperties",
-        "schema": {
-            "patternProperties": {
-                "ab?": {
-                    "type": "string",
-                    "minimum": 10,
-                    "maximum": 20
-                }
-            }
-        },
-        "value": {
-            "a": 3
-        },
-        "errors": [
-            {
-                "schema": {
-                    "type": "string",
-                    "minimum": 10,
-                    "maximum": 20
-                },
-                "schema_uri": "#/patternProperties/ab?",
-                "schema_attribute": "minimum",
-                "value": 3,
-                "value_path": "#/a"
-            },
-            {
-                "schema": {
-                    "type": "string",
-                    "minimum": 10,
-                    "maximum": 20
-                },
-                "schema_uri": "#/patternProperties/ab?",
-                "schema_attribute": "type",
-                "value": 3,
-                "value_path": "#/a"
             }
         ]
     }
