@@ -12,11 +12,11 @@ describe "validation errors" do
       assert_equal(errors.size, test_case["errors"].size, "Expected #{test_case["errors"].size} errors, got #{errors.size} errors")
 
       errors.zip(test_case["errors"]).each do |error, expected_error|
-        assert_equal(error.schema, expected_error["schema"])
-        assert_equal(error.schema_uri, expected_error["schema_uri"])
-        assert_equal(error.schema_attribute, expected_error["schema_attribute"])
-        assert_equal(error.value, expected_error["value"])
-        # assert_equal(error.value_path, expected_error["value_path"])  TODO
+        assert_equal(expected_error["schema"], error.schema)
+        assert_equal(expected_error["schema_uri"], error.schema_uri)
+        assert_equal(expected_error["schema_attribute"], error.schema_attribute)
+        assert_equal(expected_error["value"], error.value)
+        # assert_equal(expected_error["value_path"], error.value_path)  TODO
       end
     end
   end
