@@ -3,8 +3,8 @@ module JsonValidation
     class UniqueItems < Validator
       type :array
 
-      def validate(record)
-        record.size == record.uniq.size
+      def validate(value, value_path)
+        value.size == value.uniq.size
       end
     end
   end

@@ -3,8 +3,8 @@ module JsonValidation
     class AnyOf < Validator
       type :any
 
-      def validate(record)
-        inner_validators.any? {|validator| validator.validate(record)}
+      def validate(value, value_path)
+        inner_validators.any? {|validator| validator.validate(value, value_path)}
       end
 
       def inner_validators

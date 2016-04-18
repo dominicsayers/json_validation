@@ -3,20 +3,20 @@ module JsonValidation
     class Dependencies < Validator
       type :object
 
-      def validate(record)
+      def validate(value, value_path)
         schema['dependencies'].all? {|property, v|
           case v
           when Hash
             dependency_schema = v
-            if record.has_key?(property)
-              inner_validators[property].validate(record)
+            if value.has_key?(property)
+              inner_validators[property].validate(value, value_path)
             else
               true
             end
           when Array
             property_set = v
-            if record.has_key?(property)
-              property_set.all? {|p| record.has_key?(p)}
+            if value.has_key?(property)
+              property_set.all? {|p| value.has_key?(p)}
             else
               true
             end

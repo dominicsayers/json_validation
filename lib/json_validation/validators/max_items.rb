@@ -3,8 +3,8 @@ module JsonValidation
     class MaxItems < Validator
       type :array
 
-      def validate(record)
-        schema['maxItems'] >= record.size
+      def validate(value, value_path)
+        schema['maxItems'] >= value.size
       end
     end
   end

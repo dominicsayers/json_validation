@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class DateTimeFormatValidator
-  def validate(record)
-    Date.parse(record)
+  def validate(value, value_path)
+    Date.parse(value)
     true
   rescue ArgumentError
     false

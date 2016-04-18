@@ -22,16 +22,16 @@ module JsonValidation
         class_name[0].downcase + class_name[1..-1]
       end
 
-      def validate_with_errors(record)
-        if validate(record)
+      def validate_with_errors(value, value_path)
+        if validate(value, value_path)
           nil
         else
           ValidationFailure.new(
             schema: schema,
             schema_uri: uri,
             schema_attribute: attribute_name,
-            value: record,
-            value_path: nil,  # TODO
+            value: value,
+            value_path: value_path.join("/"),
           )
         end
       end

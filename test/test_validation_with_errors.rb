@@ -16,7 +16,7 @@ describe "validation errors" do
         assert_equal(expected_error["schema_uri"], error.schema_uri)
         assert_equal(expected_error["schema_attribute"], error.schema_attribute)
         assert_equal(expected_error["value"], error.value)
-        # assert_equal(expected_error["value_path"], error.value_path)  TODO
+        assert_equal(expected_error["value_path"], error.value_path)
       end
     end
   end

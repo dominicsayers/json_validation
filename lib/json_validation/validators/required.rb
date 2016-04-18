@@ -3,8 +3,8 @@ module JsonValidation
     class Required < Validator
       type :object
 
-      def validate(record)
-        schema['required'].all? {|element| record.has_key?(element)}
+      def validate(value, value_path)
+        schema['required'].all? {|element| value.has_key?(element)}
       end
     end
   end

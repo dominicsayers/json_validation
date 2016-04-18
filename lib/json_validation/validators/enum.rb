@@ -3,8 +3,8 @@ module JsonValidation
     class Enum < Validator
       type :any
 
-      def validate(record)
-        schema['enum'].include?(record)
+      def validate(value, value_path)
+        schema['enum'].include?(value)
       end
     end
   end

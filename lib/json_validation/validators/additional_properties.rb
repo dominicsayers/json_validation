@@ -3,14 +3,14 @@ module JsonValidation
     class AdditionalProperties < Validator
       type :object
 
-      def validate(record)
+      def validate(value, value_path)
         case schema['additionalProperties']
         when true
           true
         when false
-          find_additional_properties(schema, record).empty?
+          find_additional_properties(schema, value).empty?
         when Hash
-          find_additional_properties(schema, record).values.all? {|value|
+          find_additional_properties(schema, value).values.all? {|value|
             inner_validator.validate(value)
           }
         else
@@ -22,8 +22,8 @@ module JsonValidation
         @inner_validator ||= build_validator(schema["additionalProperties"], "additionalProperties")
       end
 
-      def find_additional_properties(schema, record)
-        record.reject {|k, v|
+      def find_additional_properties(schema, value)
+        value.reject {|k, v|
           schema.fetch('properties', {}).keys.include?(k)
         }.reject {|k, v|
           schema.fetch('patternProperties', {}).keys.any? {|pattern|

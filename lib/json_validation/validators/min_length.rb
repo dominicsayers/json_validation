@@ -3,8 +3,8 @@ module JsonValidation
     class MinLength < Validator
       type :string
 
-      def validate(record)
-        schema['minLength'] <= record.size
+      def validate(value, value_path)
+        schema['minLength'] <= value.size
       end
     end
   end

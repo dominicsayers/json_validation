@@ -3,8 +3,8 @@ module JsonValidation
     class MinProperties < Validator
       type :object
 
-      def validate(record)
-        schema['minProperties'] <= record.size
+      def validate(value, value_path)
+        schema['minProperties'] <= value.size
       end
     end
   end

@@ -3,8 +3,8 @@ module JsonValidation
     class Minimum < Validator
       type :number
 
-      def validate(record)
-        schema['minimum'] <= record
+      def validate(value, value_path)
+        schema['minimum'] <= value
       end
     end
   end

@@ -3,9 +3,9 @@ module JsonValidation
     class Pattern < Validator
       type :string
 
-      def validate(record)
+      def validate(value, value_path)
         rx = Regexp.new(schema['pattern'])
-        !!rx.match(record)
+        !!rx.match(value)
       end
     end
   end

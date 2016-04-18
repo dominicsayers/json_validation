@@ -3,8 +3,8 @@ module JsonValidation
     class MultipleOf < Validator
       type :number
 
-      def validate(record)
-        BigDecimal.new(record.to_s) % BigDecimal.new(schema['multipleOf'].to_s) == 0
+      def validate(value, value_path)
+        BigDecimal.new(value.to_s) % BigDecimal.new(schema['multipleOf'].to_s) == 0
       end
     end
   end

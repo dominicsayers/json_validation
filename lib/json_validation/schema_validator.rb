@@ -13,15 +13,17 @@ module JsonValidation
       end
     end
 
-    def validate(record)
+    def validate(record, record_path = nil)
+      record_path ||= ["#"]
       validators_for_record(record).all? {|validator|
-        validator.validate(record)
+        validator.validate(record, record_path)
       }
     end
 
-    def validate_with_errors(record)
+    def validate_with_errors(record, record_path = nil)
+      record_path ||= ["#"]
       validators_for_record(record).map {|validator|
-        validator.validate_with_errors(record)
+        validator.validate_with_errors(record, record_path)
       }.flatten.compact
     end
 

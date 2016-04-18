@@ -3,7 +3,7 @@ module JsonValidation
     class AdditionalItems < Validator
       type :array
 
-      def validate(record)
+      def validate(value, value_path)
         if !schema.has_key?('items') || schema['items'].is_a?(Hash)
           true
         else
@@ -11,9 +11,9 @@ module JsonValidation
           when true
             true
           when false
-            find_additional_items(schema, record).empty?
+            find_additional_items(schema, value).empty?
           when Hash
-            find_additional_items(schema, record).all? {|item|
+            find_additional_items(schema, value).all? {|item|
               inner_validator.validate(item)
             }
           else
@@ -26,8 +26,8 @@ module JsonValidation
         @inner_validator ||= build_validator(schema["additionalItems"], "additionalItems")
       end
 
-      def find_additional_items(schema, record)
-        record.drop(schema['items'].size)
+      def find_additional_items(schema, value)
+        value.drop(schema['items'].size)
       end
     end
   end

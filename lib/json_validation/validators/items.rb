@@ -3,12 +3,12 @@ module JsonValidation
     class Items < Validator
       type :array
 
-      def validate(record)
+      def validate(value, value_path)
         case schema['items']
         when Hash
-          record.all? {|item| inner_validator.validate(item)}
+          value.all? {|item| inner_validator.validate(item)}
         when Array
-          inner_validators.zip(record).all? {|validator, item|
+          inner_validators.zip(value).all? {|validator, item|
             validator.validate(item)
           }
         else

@@ -3,8 +3,8 @@ module JsonValidation
     class ExclusiveMaximum < Validator
       type :number
 
-      def validate(record)
-        schema['maximum'] > record
+      def validate(value, value_path)
+        schema['maximum'] > value
       end
     end
   end

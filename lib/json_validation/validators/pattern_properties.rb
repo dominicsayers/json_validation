@@ -3,20 +3,20 @@ module JsonValidation
     class PatternProperties < Validator
       type :object
 
-      def validate(record)
+      def validate(value, value_path)
         schema['patternProperties'].keys.all? {|pattern|
           rx = Regexp.new(pattern)
-          record.select {|k, v| rx.match(k)}.all? {|k, v|
-            inner_validators[pattern].validate(v)
+          value.select {|k, v| rx.match(k)}.all? {|k, v|
+            inner_validators[pattern].validate(v, value_path + [k])
           }
         }
       end
 
-      def validate_with_errors(record)
+      def validate_with_errors(value, value_path)
         schema['patternProperties'].keys.map {|pattern|
           rx = Regexp.new(pattern)
-          record.select {|k, v| rx.match(k)}.map {|k, v|
-            inner_validators[pattern].validate_with_errors(v)
+          value.select {|k, v| rx.match(k)}.map {|k, v|
+            inner_validators[pattern].validate_with_errors(v, value_path + [k])
           }
         }
       end

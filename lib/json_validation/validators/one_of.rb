@@ -3,8 +3,8 @@ module JsonValidation
     class OneOf < Validator
       type :any
 
-      def validate(record)
-        inner_validators.count {|validator| validator.validate(record)} == 1
+      def validate(value, value_path)
+        inner_validators.count {|validator| validator.validate(value, value_path)} == 1
       end
 
       def inner_validators

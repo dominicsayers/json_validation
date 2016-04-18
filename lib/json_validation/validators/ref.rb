@@ -3,8 +3,8 @@ module JsonValidation
     class Ref < Validator
       type :any
 
-      def validate(record)
-        inner_validator.validate(record)
+      def validate(value, value_path)
+        inner_validator.validate(value, value_path)
       end
 
       def inner_validator

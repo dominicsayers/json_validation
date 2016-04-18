@@ -3,8 +3,8 @@ module JsonValidation
     class MaxProperties < Validator
       type :object
 
-      def validate(record)
-        schema['maxProperties'] >= record.size
+      def validate(value, value_path)
+        schema['maxProperties'] >= value.size
       end
     end
   end

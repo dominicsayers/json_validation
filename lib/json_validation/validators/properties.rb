@@ -3,20 +3,20 @@ module JsonValidation
     class Properties < Validator
       type :object
 
-      def validate(record)
+      def validate(value, value_path)
         schema['properties'].keys.all? {|key|
-          if record[key]
-            inner_validators[key].validate(record[key])
+          if value[key]
+            inner_validators[key].validate(value[key], value_path + [key])
           else
             true
           end
         }
       end
 
-      def validate_with_errors(record)
+      def validate_with_errors(value, value_path)
         schema['properties'].keys.map {|key|
-          if record[key]
-            inner_validators[key].validate_with_errors(record[key])
+          if value[key]
+            inner_validators[key].validate_with_errors(value[key], value_path + [key])
           else
             nil
           end

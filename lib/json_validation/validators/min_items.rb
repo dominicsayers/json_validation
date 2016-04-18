@@ -3,8 +3,8 @@ module JsonValidation
     class MinItems < Validator
       type :array
 
-      def validate(record)
-        schema['minItems'] <= record.size
+      def validate(value, value_path)
+        schema['minItems'] <= value.size
       end
     end
   end

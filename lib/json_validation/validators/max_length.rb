@@ -3,8 +3,8 @@ module JsonValidation
     class MaxLength < Validator
       type :string
 
-      def validate(record)
-        schema['maxLength'] >= record.size
+      def validate(value, value_path)
+        schema['maxLength'] >= value.size
       end
     end
   end
