@@ -1,1 +1,74 @@
-{"status": "TODO"}
+[
+    {
+        "description": "items is schema",
+        "schema": {
+            "items": {
+                "type": "integer",
+                "minimum": 10
+            }
+        },
+        "value": [
+            1,
+            "two"
+        ],
+        "errors": [
+            {
+                "schema": {
+                    "type": "integer",
+                    "minimum": 10
+                },
+                "schema_uri": "#/items",
+                "schema_attribute": "minimum",
+                "value": 1,
+                "value_path": "#/0"
+            },
+            {
+                "schema": {
+                    "type": "integer",
+                    "minimum": 10
+                },
+                "schema_uri": "#/items",
+                "schema_attribute": "type",
+                "value": "two",
+                "value_path": "#/1"
+            }
+        ]
+    },
+    {
+        "description": "items is array of schemas",
+        "schema": {
+            "items": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "integer"
+                }
+            ]
+        },
+        "value": [
+            1,
+            "two"
+        ],
+        "errors": [
+            {
+                "schema": {
+                    "type": "string"
+                },
+                "schema_uri": "#/items/0",
+                "schema_attribute": "type",
+                "value": 1,
+                "value_path": "#/0"
+            },
+            {
+                "schema": {
+                    "type": "integer"
+                },
+                "schema_uri": "#/items/1",
+                "schema_attribute": "type",
+                "value": "two",
+                "value_path": "#/1"
+            }
+        ]
+    }
+]

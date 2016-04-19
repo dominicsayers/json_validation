@@ -1,1 +1,24 @@
-{"status": "TODO"}
+[
+    {
+        "description": "not",
+        "schema": {
+            "not": {
+                "type": "integer"
+            }
+        },
+        "value": 3,
+        "errors": [
+            {
+                "schema": {
+                    "not": {
+                        "type": "integer"
+                    }
+                },
+                "schema_uri": "#/",
+                "schema_attribute": "not",
+                "value": 3,
+                "value_path": "#"
+            }
+        ]
+    }
+]

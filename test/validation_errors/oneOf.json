@@ -1,1 +1,78 @@
-{"status": "TODO"}
+[
+    {
+        "description": "oneOf no matches",
+        "schema": {
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "minimum": 20
+                },
+                {
+                    "maximum": 10
+                }
+            ]
+        },
+        "value": 13,
+        "errors": [
+            {
+                "schema": {
+                    "oneOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "minimum": 20
+                        },
+                        {
+                            "maximum": 10
+                        }
+                    ]
+                },
+                "schema_uri": "#/",
+                "schema_attribute": "oneOf",
+                "value": 13,
+                "value_path": "#"
+            }
+        ]
+    },
+    {
+        "description": "oneOf many matches",
+        "schema": {
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "minimum": 10
+                },
+                {
+                    "maximum": 20
+                }
+            ]
+        },
+        "value": 13,
+        "errors": [
+            {
+                "schema": {
+                    "oneOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "minimum": 10
+                        },
+                        {
+                            "maximum": 20
+                        }
+                    ]
+                },
+                "schema_uri": "#/",
+                "schema_attribute": "oneOf",
+                "value": 13,
+                "value_path": "#"
+            }
+        ]
+    }
+]

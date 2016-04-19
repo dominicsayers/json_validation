@@ -1,1 +1,40 @@
-{"status": "TODO"}
+[
+    {
+        "description": "allOf",
+        "schema": {
+            "allOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "minimum": 10
+                },
+                {
+                    "maximum": 20
+                }
+            ]
+        },
+        "value": 3,
+        "errors": [
+            {
+                "schema": {
+                    "allOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "minimum": 10
+                        },
+                        {
+                            "maximum": 20
+                        }
+                    ]
+                },
+                "schema_uri": "#/",
+                "schema_attribute": "allOf",
+                "value": 3,
+                "value_path": "#"
+            }
+        ]
+    }
+]

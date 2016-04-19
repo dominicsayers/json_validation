@@ -1,1 +1,90 @@
-{"status": "TODO"}
+[
+    {
+        "description": "items is array of schemas, additionalItems is false",
+        "schema": {
+            "items": [
+                {
+                    "type": "integer"
+                },
+                {
+                    "type": "string"
+                }
+            ],
+            "additionalItems": false
+        },
+        "value": [
+            1,
+            "two",
+            3
+        ],
+        "errors": [
+            {
+                "schema": {
+                    "items": [
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "additionalItems": false
+                },
+                "schema_uri": "#/",
+                "schema_attribute": "additionalItems",
+                "value": [
+                    1,
+                    "two",
+                    3
+                ],
+                "value_path": "#"
+            }
+        ]
+    },
+    {
+        "description": "additionalItems is a schema",
+        "schema": {
+            "items": [
+                {
+                    "type": "integer"
+                },
+                {
+                    "type": "string"
+                }
+            ],
+            "additionalItems": {
+                "type": "string"
+            }
+        },
+        "value": [
+            1,
+            "two",
+            3
+        ],
+        "errors": [
+            {
+                "schema": {
+                    "items": [
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "additionalItems": {
+                        "type": "string"
+                    }
+                },
+                "schema_uri": "#/",
+                "schema_attribute": "additionalItems",
+                "value": [
+                    1,
+                    "two",
+                    3
+                ],
+                "value_path": "#"
+            }
+        ]
+    }
+]

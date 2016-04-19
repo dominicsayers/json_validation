@@ -6,10 +6,24 @@ module JsonValidation
       def validate(value, value_path)
         case schema['items']
         when Hash
-          value.all? {|item| inner_validator.validate(item)}
+          value.each_with_index.all? {|item, ix| inner_validator.validate(item, value_path + [ix.to_s])}
         when Array
           inner_validators.zip(value).all? {|validator, item|
             validator.validate(item)
+          }
+        else
+          raise "Unexpected type for schema['items']"
+        end
+      end
+
+      def validate_with_errors(value, value_path)
+        case schema['items']
+        when Hash
+          value.each_with_index.map {|item, ix| inner_validator.validate_with_errors(item, value_path + [ix.to_s])}
+        when Array
+          inner_validators.zip(value).each_with_index.map {|validator_and_item, ix|
+            validator, item = validator_and_item
+            validator.validate_with_errors(item, value_path + [ix.to_s])
           }
         else
           raise "Unexpected type for schema['items']"

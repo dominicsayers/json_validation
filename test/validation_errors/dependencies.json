@@ -1,1 +1,72 @@
-{"status": "TODO"}
+[
+    {
+        "description": "dependencies is array of properties",
+        "schema": {
+            "dependencies": {
+                "a": [
+                    "b"
+                ]
+            }
+        },
+        "value": {
+            "a": 3
+        },
+        "errors": [
+            {
+                "schema": {
+                    "dependencies": {
+                        "a": [
+                            "b"
+                        ]
+                    }
+                },
+                "schema_uri": "#/",
+                "schema_attribute": "dependencies",
+                "value": {
+                    "a": 3
+                },
+                "value_path": "#"
+            }
+        ]
+    },
+    {
+        "description": "dependencies is object mapping properties to schemas",
+        "schema": {
+            "dependencies": {
+                "a": {
+                    "properties": {
+                        "b": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "value": {
+            "a": 3,
+            "b": 4
+        },
+        "errors": [
+            {
+                "schema": {
+                    "dependencies": {
+                        "a": {
+                            "properties": {
+                                "b": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "schema_uri": "#/",
+                "schema_attribute": "dependencies",
+                "value": {
+                    "a": 3,
+                    "b": 4
+                },
+                "value_path": "#"
+            }
+        ]
+    }
+]

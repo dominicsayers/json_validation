@@ -1,1 +1,74 @@
-{"status": "TODO"}
+[
+    {
+        "description": "additionalProperties is false",
+        "schema": {
+            "properties": {
+                "a": {
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": false
+        },
+        "value": {
+            "a": 3,
+            "b": 4
+        },
+        "errors": [
+            {
+                "schema": {
+                    "properties": {
+                        "a": {
+                            "type": "integer"
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "schema_uri": "#/",
+                "schema_attribute": "additionalProperties",
+                "value": {
+                    "a": 3,
+                    "b": 4
+                },
+                "value_path": "#"
+            }
+        ]
+    },
+    {
+        "description": "additionalProperties is a schema",
+        "schema": {
+            "properties": {
+                "a": {
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": {
+                "type": "string"
+            }
+        },
+        "value": {
+            "a": 3,
+            "b": 4
+        },
+        "errors": [
+            {
+                "schema": {
+                    "properties": {
+                        "a": {
+                            "type": "integer"
+                        }
+                    },
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "schema_uri": "#/",
+                "schema_attribute": "additionalProperties",
+                "value": {
+                    "a": 3,
+                    "b": 4
+                },
+                "value_path": "#"
+            }
+        ]
+    }
+]
