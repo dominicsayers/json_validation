@@ -30,7 +30,7 @@
                     ],
                     "additionalItems": false
                 },
-                "schema_uri": "#/",
+                "schema_uri_fragment": "",
                 "schema_attribute": "additionalItems",
                 "value": [
                     1,
@@ -76,7 +76,7 @@
                         "type": "string"
                     }
                 },
-                "schema_uri": "#/",
+                "schema_uri_fragment": "",
                 "schema_attribute": "additionalItems",
                 "value": [
                     1,

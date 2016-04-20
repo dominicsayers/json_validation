@@ -30,7 +30,7 @@
                         }
                     ]
                 },
-                "schema_uri": "#/",
+                "schema_uri_fragment": "",
                 "schema_attribute": "allOf",
                 "value": 3,
                 "value_path": "#"

@@ -11,9 +11,9 @@ module JsonValidation
         return @inner_validator if @inner_validator
 
         path = schema['$ref']
-        reffed_uri = base_uri.join(Addressable::URI.parse(path))
+        reffed_uri = schema.resolution_scope.join(Addressable::URI.parse(path))
         reffed_schema = JsonValidation.load_schema(reffed_uri)
-        @inner_validator = build_validator_with_new_base_uri(reffed_schema, "#/", reffed_uri)
+        @inner_validator = SchemaValidator.new(reffed_schema)
       end
     end
   end

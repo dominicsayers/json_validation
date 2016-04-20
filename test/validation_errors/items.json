@@ -17,7 +17,7 @@
                     "type": "integer",
                     "minimum": 10
                 },
-                "schema_uri": "#/items",
+                "schema_uri_fragment": "/items",
                 "schema_attribute": "minimum",
                 "value": 1,
                 "value_path": "#/0"
@@ -27,7 +27,7 @@
                     "type": "integer",
                     "minimum": 10
                 },
-                "schema_uri": "#/items",
+                "schema_uri_fragment": "/items",
                 "schema_attribute": "type",
                 "value": "two",
                 "value_path": "#/1"
@@ -55,7 +55,7 @@
                 "schema": {
                     "type": "string"
                 },
-                "schema_uri": "#/items/0",
+                "schema_uri_fragment": "/items/0",
                 "schema_attribute": "type",
                 "value": 1,
                 "value_path": "#/0"
@@ -64,7 +64,7 @@
                 "schema": {
                     "type": "integer"
                 },
-                "schema_uri": "#/items/1",
+                "schema_uri_fragment": "/items/1",
                 "schema_attribute": "type",
                 "value": "two",
                 "value_path": "#/1"

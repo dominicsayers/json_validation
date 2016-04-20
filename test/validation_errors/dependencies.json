@@ -20,7 +20,7 @@
                         ]
                     }
                 },
-                "schema_uri": "#/",
+                "schema_uri_fragment": "",
                 "schema_attribute": "dependencies",
                 "value": {
                     "a": 3
@@ -59,7 +59,7 @@
                         }
                     }
                 },
-                "schema_uri": "#/",
+                "schema_uri_fragment": "",
                 "schema_attribute": "dependencies",
                 "value": {
                     "a": 3,

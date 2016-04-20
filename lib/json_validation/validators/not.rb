@@ -8,7 +8,7 @@ module JsonValidation
       end
 
       def inner_validator
-        @inner_validator ||= build_validator(schema["not"], "not")
+        @inner_validator ||= SchemaValidator.new(schema["not"])
       end
     end
   end

@@ -9,7 +9,7 @@ module JsonValidation
           true
         when false
           find_additional_properties(schema, value).empty?
-        when Hash
+        when Schema
           find_additional_properties(schema, value).values.all? {|value|
             inner_validator.validate(value)
           }
@@ -19,7 +19,7 @@ module JsonValidation
       end
 
       def inner_validator
-        @inner_validator ||= build_validator(schema["additionalProperties"], "additionalProperties")
+        @inner_validator ||= SchemaValidator.new(schema["additionalProperties"])
       end
 
       def find_additional_properties(schema, value)

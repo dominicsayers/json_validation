@@ -20,7 +20,7 @@
                     "minimum": 10,
                     "maximum": 20
                 },
-                "schema_uri": "#/patternProperties/ab?",
+                "schema_uri_fragment": "/patternProperties/ab?",
                 "schema_attribute": "minimum",
                 "value": 3,
                 "value_path": "#/a"
@@ -31,7 +31,7 @@
                     "minimum": 10,
                     "maximum": 20
                 },
-                "schema_uri": "#/patternProperties/ab?",
+                "schema_uri_fragment": "/patternProperties/ab?",
                 "schema_attribute": "type",
                 "value": 3,
                 "value_path": "#/a"

@@ -14,7 +14,7 @@
                         "type": "integer"
                     }
                 },
-                "schema_uri": "#/",
+                "schema_uri_fragment": "",
                 "schema_attribute": "not",
                 "value": 3,
                 "value_path": "#"

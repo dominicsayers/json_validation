@@ -8,9 +8,7 @@ module JsonValidation
       end
 
       def inner_validators
-        @inner_validators ||= schema["anyOf"].each_with_index.map {|f, ix|
-          build_validator(f, "anyOf/#{ix}")
-        }
+        @inner_validators ||= schema["anyOf"].map {|subschema| SchemaValidator.new(subschema)}
       end
     end
   end

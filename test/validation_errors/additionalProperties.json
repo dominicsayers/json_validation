@@ -23,7 +23,7 @@
                     },
                     "additionalProperties": false
                 },
-                "schema_uri": "#/",
+                "schema_uri_fragment": "",
                 "schema_attribute": "additionalProperties",
                 "value": {
                     "a": 3,
@@ -61,7 +61,7 @@
                         "type": "string"
                     }
                 },
-                "schema_uri": "#/",
+                "schema_uri_fragment": "",
                 "schema_attribute": "additionalProperties",
                 "value": {
                     "a": 3,

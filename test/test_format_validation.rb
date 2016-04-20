@@ -24,10 +24,7 @@ describe "format validation" do
     test_groups = JSON.load(File.read(path))
     test_group = test_groups.detect {|group| group['description'] == 'validation of date-time strings'}
 
-    validator = JsonValidation.build_validator(
-      test_group['schema'],
-      strict_format_validation: true
-    )
+    validator = JsonValidation.build_validator(test_group['schema'])
 
     test_group['tests'].each do |test|
       record = test['data']

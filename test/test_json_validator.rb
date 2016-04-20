@@ -21,6 +21,12 @@ describe JsonValidation do
       validator = JsonValidation.build_validator(schema)
       assert(validator.validate(3))
     end
+
+    it 'accepts a Schema' do
+      schema = JsonValidation::Schema.new({'type' => 'integer'})
+      validator = JsonValidation.build_validator(schema)
+      assert(validator.validate(3))
+    end
   end
 
   describe '.load_schema' do
@@ -35,21 +41,31 @@ describe JsonValidation do
     it 'can load schema on filesystem' do
       path = File.join(File.dirname(__FILE__), 'schemas', 'integer.json')
       uri = Addressable::URI.parse(path)
-      assert_equal({'type' => 'integer'}, JsonValidation.load_schema(uri))
+      schema = JsonValidation.load_schema(uri)
+      assert_equal({'type' => 'integer'}, schema.schema_data)
+      assert_equal(uri, schema.uri)
+      assert_equal(uri, schema.base_uri)
     end
 
     it 'can load schema via HTTP' do
       uri = Addressable::URI.parse('http://localhost:1234/integer.json')
-      assert_equal({'type' => 'integer'}, JsonValidation.load_schema(uri))
+      schema = JsonValidation.load_schema(uri)
+      assert_equal({'type' => 'integer'}, schema.schema_data)
+      assert_equal(uri, schema.uri)
+      assert_equal(uri, schema.base_uri)
     end
 
     it 'can load schema when URI has fragment' do
       uri = Addressable::URI.parse('http://localhost:1234/subSchemas.json#/integer')
-      assert_equal({'type' => 'integer'}, JsonValidation.load_schema(uri))
+      base_uri = Addressable::URI.parse('http://localhost:1234/subSchemas.json')
+      schema = JsonValidation.load_schema(uri)
+      assert_equal({'type' => 'integer'}, schema.schema_data)
+      assert_equal(uri, schema.uri)
+      assert_equal(base_uri, schema.base_uri)
     end
 
     it 'caches schema' do
-      JSON.expects(:parse).once
+      JSON.expects(:parse).once.returns({})
 
       uri = Addressable::URI.parse('http://localhost:1234/integer.json')
       JsonValidation.load_schema(uri)

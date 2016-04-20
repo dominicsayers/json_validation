@@ -4,6 +4,7 @@ require 'open-uri'
 
 require 'addressable/uri'
 
+require 'json_validation/schema'
 require 'json_validation/schema_validator'
 require 'json_validation/validation_failure'
 require 'json_validation/validators/validator'
@@ -30,24 +31,16 @@ module JsonValidation
     uri = Addressable::URI.parse(uri) unless uri.is_a?(Addressable::URI)
 
     schema = load_schema(uri)
-    build_validator(schema, uri, uri)
+    build_validator(schema, uri)
   end
 
-  def build_validator(schema, uri = nil, base_uri = nil)
-    if uri.nil?
-      uri = "#/"
+  def build_validator(schema, uri = nil)
+    if schema.is_a?(Hash)
+      schema = Schema.new(schema, uri)
+      schema_cache[schema.base_uri] = schema
     end
 
-    if base_uri.nil?
-      base_uri = generate_uri(schema)
-      schema_cache[base_uri] = schema
-    end
-
-    SchemaValidator.new(schema, uri, base_uri)
-  end
-
-  def generate_uri(schema)
-    Addressable::URI.parse(Digest::SHA1.hexdigest(schema.to_json))
+    SchemaValidator.new(schema)
   end
 
   def load_schema(uri)
@@ -58,34 +51,7 @@ module JsonValidation
     uri.fragment = nil
     schema = schema_cache[uri]
 
-    return schema if uri_fragment == "" || uri_fragment.nil?
-
-    fragment = schema
-
-    uri_fragment[1..-1].split('/').each do |element|
-      element = element.gsub('~0', '~').gsub('~1', '/').gsub('%25', '%')
-
-      case fragment
-      when Hash
-        if fragment.has_key?(element)
-          fragment = fragment[element]
-          next
-        end
-      when Array
-        begin
-          ix = Integer(element)
-          if ix < fragment.size
-            fragment = fragment[ix]
-            next
-          end
-        rescue ArgumentError
-        end
-      else
-        raise "Could not look up #{uri_fragment} in #{schema}"
-      end
-    end
-
-    fragment
+    schema[uri_fragment]
   end
 
   def clear_schema_cache
@@ -94,7 +60,9 @@ module JsonValidation
 
   def schema_cache
     @schema_cache ||= Hash.new {|cache, uri|
-      cache[uri] = JSON.parse(open(uri).read)
+      schema_data = JSON.parse(open(uri).read)
+      schema = Schema.new(schema_data, uri)
+      cache[uri] = schema
     }
   end
 
