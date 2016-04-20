@@ -1,1 +1,53 @@
-{"status": "TODO"}
+[
+    {
+        "description": "relative ref",
+        "schema": {
+            "a": {
+                "type": "string"
+            },
+            "properties": {
+                "b": {
+                    "$ref": "#/a"
+                }
+            }
+        },
+        "value": {
+            "b": 3
+        },
+        "errors": [
+            {
+                "schema": {
+                        "type": "string"
+                },
+                "schema_uri_fragment": "/a",
+                "schema_attribute": "type",
+                "value": 3,
+                "value_path": "#/b"
+            }
+        ]
+    },
+    {
+        "description": "absolute ref",
+        "schema": {
+            "properties": {
+                "b": {
+                    "$ref":  "http://localhost:1234/integer.json"
+                }
+            }
+        },
+        "value": {
+            "b": "three"
+        },
+        "errors": [
+            {
+                "schema": {
+                        "type": "integer"
+                },
+                "schema_uri": "http://localhost:1234/integer.json#",
+                "schema_attribute": "type",
+                "value": "three",
+                "value_path": "#/b"
+            }
+        ]
+    }
+]

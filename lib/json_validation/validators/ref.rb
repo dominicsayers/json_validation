@@ -7,6 +7,10 @@ module JsonValidation
         inner_validator.validate(value, value_path)
       end
 
+      def validate_with_errors(value, value_path)
+        inner_validator.validate_with_errors(value, value_path)
+      end
+
       def inner_validator
         return @inner_validator if @inner_validator
 
