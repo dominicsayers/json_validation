@@ -15,7 +15,7 @@ module JsonValidation
         @schema = schema
       end
 
-      def attribute_name
+      def schema_attribute
         class_name = self.class.name.split("::").last
         class_name[0].downcase + class_name[1..-1]
       end
@@ -27,7 +27,7 @@ module JsonValidation
           ValidationFailure.new(
             schema: schema,
             schema_uri: schema.uri,
-            schema_attribute: attribute_name,
+            schema_attribute: schema_attribute,
             value: value,
             value_path: value_path.join("/"),
           )
