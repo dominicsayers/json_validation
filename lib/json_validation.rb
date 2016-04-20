@@ -28,23 +28,25 @@ module JsonValidation
   }
 
   def load_validator(uri)
-    uri = Addressable::URI.parse(uri) unless uri.is_a?(Addressable::URI)
-
+    uri = Addressable::URI.parse(uri)
     schema = load_schema(uri)
-    build_validator(schema, uri)
+    SchemaValidator.new(schema)
   end
 
-  def build_validator(schema, uri = nil)
-    if schema.is_a?(Hash)
-      schema = Schema.new(schema, uri)
-      schema_cache[schema.base_uri] = schema
+  def build_validator(schema_or_schema_data, opts = {})
+    if schema_or_schema_data.is_a?(Schema)
+      raise ArgumentError.new("Cannot provide uri when building validator with schema") unless opts[:uri].nil?
+      schema = schema_or_schema_data
+    else
+      schema = Schema.new(schema_or_schema_data, opts[:uri])
     end
 
+    schema_cache[schema.base_uri] = schema
     SchemaValidator.new(schema)
   end
 
   def load_schema(uri)
-    raise unless uri.is_a?(Addressable::URI)
+    uri = Addressable::URI.parse(uri)
 
     uri = uri.clone
     uri_fragment = uri.fragment
