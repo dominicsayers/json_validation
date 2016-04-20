@@ -56,10 +56,10 @@ module JsonValidation
         escaped_key = key.gsub('~0', '~').gsub('~1', '/').gsub('%25', '%')
         value = schema_data[escaped_key]
         if value.is_a?(Hash)
-          value = Schema.new(value, base_uri, resolution_scope, fragment_elements + [key.to_s])
+          value = build_subschema(value, [key])
         elsif value.is_a?(Array) && value[0].is_a?(Hash)
           value = value.each_with_index.map {|v, ix|
-            Schema.new(v, base_uri, resolution_scope, fragment_elements + [key.to_s] + [ix.to_s])
+            build_subschema(v, [key, ix.to_s])
           }
         end
       end
@@ -78,9 +78,13 @@ module JsonValidation
       end
     end
 
+    def build_subschema(subschema_data, extra_fragment_elements)
+      Schema.new(subschema_data, base_uri, resolution_scope, fragment_elements + extra_fragment_elements)
+    end
+
     def map(&block)
-      schema_data.map {|key, subschema|
-        block.call(key, Schema.new(subschema, base_uri, resolution_scope, fragment_elements + [key]))
+      schema_data.map {|key, subschema_data|
+        block.call(key, build_subschema(subschema_data, [key]))
       }
     end
   end
