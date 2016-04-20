@@ -24,14 +24,19 @@ module JsonValidation
         if validate(value, value_path)
           nil
         else
-          ValidationFailure.new(
-            schema: schema,
-            schema_uri: schema.uri,
-            schema_attribute: schema_attribute,
-            value: value,
-            value_path: value_path.join("/"),
-          )
+          fail_validation(value, value_path)
         end
+      end
+
+      def fail_validation(value, value_path, failures = nil)
+        ValidationFailure.new(
+          schema: schema,
+          schema_uri: schema.uri,
+          schema_attribute: schema_attribute,
+          value: value,
+          value_path: value_path.join("/"),
+          failures: failures,
+        )
       end
     end
   end

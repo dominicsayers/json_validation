@@ -10,9 +10,34 @@ module JsonValidation
         when false
           find_additional_properties(schema, value).empty?
         when Schema
-          find_additional_properties(schema, value).values.all? {|value|
-            inner_validator.validate(value)
+          find_additional_properties(schema, value).all? {|key, value|
+            inner_validator.validate(value, value_path + [key])
           }
+        else
+          raise "Unexpected type for schema['additionalProperties']"
+        end
+      end
+
+      def validate_with_errors(value, value_path)
+        case schema['additionalProperties']
+        when true
+          nil
+        when false
+          if find_additional_properties(schema, value).empty?
+            nil
+          else
+            fail_validation(value, value_path)
+          end
+        when Schema
+          failures = find_additional_properties(schema, value).map {|key, value|
+            inner_validator.validate_with_errors(value, value_path + [key])
+          }.flatten.compact
+
+          if failures.any?
+            fail_validation(value, value_path, failures)
+          else
+            nil
+          end
         else
           raise "Unexpected type for schema['additionalProperties']"
         end

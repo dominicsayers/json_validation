@@ -33,7 +33,36 @@
                 "schema_uri_fragment": "",
                 "schema_attribute": "anyOf",
                 "value": 13,
-                "value_path": "#"
+                "value_path": "#",
+                "failures": [
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "schema_uri_fragment": "/anyOf/0",
+                        "schema_attribute": "type",
+                        "value": 13,
+                        "value_path": "#"
+                    },
+                    {
+                        "schema": {
+                            "minimum": 20
+                        },
+                        "schema_uri_fragment": "/anyOf/1",
+                        "schema_attribute": "minimum",
+                        "value": 13,
+                        "value_path": "#"
+                    },
+                    {
+                        "schema": {
+                            "maximum": 10
+                        },
+                        "schema_uri_fragment": "/anyOf/2",
+                        "schema_attribute": "maximum",
+                        "value": 13,
+                        "value_path": "#"
+                    }
+                ]
             }
         ]
     }

@@ -4,7 +4,8 @@ module JsonValidation
     :schema_uri,
     :schema_attribute,
     :value,
-    :value_path
+    :value_path,
+    :failures,
   )
     def initialize(hash)
       hash.each do |k, v|

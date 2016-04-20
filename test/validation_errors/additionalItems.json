@@ -83,7 +83,18 @@
                     "two",
                     3
                 ],
-                "value_path": "#"
+                "value_path": "#",
+                "failures": [
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "schema_uri_fragment": "/additionalItems",
+                        "schema_attribute": "type",
+                        "value": 3,
+                        "value_path": "#/2"
+                    }
+                ]
             }
         ]
     }

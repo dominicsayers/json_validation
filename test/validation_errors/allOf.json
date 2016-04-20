@@ -33,7 +33,27 @@
                 "schema_uri_fragment": "",
                 "schema_attribute": "allOf",
                 "value": 3,
-                "value_path": "#"
+                "value_path": "#",
+                "failures": [
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "schema_uri_fragment": "/allOf/0",
+                        "schema_attribute": "type",
+                        "value": 3,
+                        "value_path": "#"
+                    },
+                    {
+                        "schema": {
+                            "minimum": 10
+                        },
+                        "schema_uri_fragment": "/allOf/1",
+                        "schema_attribute": "minimum",
+                        "value": 3,
+                        "value_path": "#"
+                    }
+                ]
             }
         ]
     }

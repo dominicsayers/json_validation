@@ -25,7 +25,24 @@
                 "value": {
                     "a": 3
                 },
-                "value_path": "#"
+                "value_path": "#",
+                "failures": [
+                    {
+                        "schema": {
+                            "dependencies": {
+                                "a": [
+                                    "b"
+                                ]
+                            }
+                        },
+                        "schema_uri_fragment": "",
+                        "schema_attribute": "dependencies",
+                        "value": {
+                            "a": 3
+                        },
+                        "value_path": "#"
+                    }
+                ]
             }
         ]
     },
@@ -65,7 +82,18 @@
                     "a": 3,
                     "b": 4
                 },
-                "value_path": "#"
+                "value_path": "#",
+                "failures": [
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "schema_uri_fragment": "/dependencies/a/properties/b",
+                        "schema_attribute": "type",
+                        "value": 4,
+                        "value_path": "#/b"
+                    }
+                ]
             }
         ]
     }
